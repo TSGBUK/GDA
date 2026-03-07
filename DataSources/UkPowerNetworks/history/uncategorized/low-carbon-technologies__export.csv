@@ -1,0 +1,11 @@
+LCT_Connections,Category,Type,ImportRating,ExportRating,LicenceArea,Primary,PrimaryName,SiteFunctionalLocation,SpatialCoordinates,ConnectionStatus,ExportRating_MW
+190,Demand,Heat Pump,1318.4599999999982,0,Eastern Power Networks (EPN),0H5074,BEIGHTON PRIMARY,EPN-S0000000H5074,"{'lon': 1.514402, 'lat': 52.622185}",Connected,0.0
+131,Demand,Heat Pump,816.6800000000004,0,Eastern Power Networks (EPN),0H5080,HARDINGHAM PRIMARY,EPN-S0000000H5080,"{'lon': 1.022523, 'lat': 52.601322}",Connected,0.0
+158,Demand,Heat Pump,1048.45,0,Eastern Power Networks (EPN),0H5086,BARSHAM PRIMARY,EPN-S0000000H5086,"{'lon': 1.540535, 'lat': 52.4533}",Connected,0.0
+24,Demand,Heat Pump,154.39,0,Eastern Power Networks (EPN),0H6004,EGMERE PRIMARY,EPN-S0000000H6004,"{'lon': 0.83127, 'lat': 52.907103}",Connected,0.0
+203,Demand,Heat Pump,1600.74,0,Eastern Power Networks (EPN),0H6011,WATTON PRIMARY,EPN-S0000000H6011,"{'lon': 0.815545, 'lat': 52.57585}",Connected,0.0
+64,Demand,Heat Pump,427.04999999999995,0,Eastern Power Networks (EPN),0H6017,FARCET PRIMARY,EPN-S0000000H6017,"{'lon': -0.234091, 'lat': 52.536726}",Connected,0.0
+121,Demand,Heat Pump,822.87,0,Eastern Power Networks (EPN),0H6029,MARCH PRIMARY,EPN-S0000000H6029,"{'lon': 0.085879, 'lat': 52.549098}",Connected,0.0
+41,Demand,Heat Pump,233.19000000000005,0,Eastern Power Networks (EPN),0H6040,LT MASSINGHAM PRIMARY,EPN-S0000000H6040,"{'lon': 0.658579, 'lat': 52.787805}",Connected,0.0
+59,Demand,Heat Pump,476.63000000000005,0,Eastern Power Networks (EPN),0H6050,WOODWALTON PRIMARY,EPN-S0000000H6050,"{'lon': -0.21344, 'lat': 52.413238}",Connected,0.0
+123,Demand,Heat Pump,795.8400000000005,0,Eastern Power Networks (EPN),0H6055,HARDWICK RD PRIMARY,EPN-S0000000H6055,"{'lon': 0.408051, 'lat': 52.74067}",Connected,0.0

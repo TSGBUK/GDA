@@ -1,0 +1,11 @@
+Grid Supply Point,Unique NODD ID,Site Name,Connection Status,Technology,Developer Capacity (MW),Date of Connection,Date of Non-firm / Accelerated Connection,Contract Status,Type of contract,Previously offered new GSP?,Position
+WILLESDEN,WISD-EPN-1264,"First Way, Wembley",Connected,Gas,5.0,Connected,,Included in a signed contract,App G,N,1106
+WILLESDEN 66,WILS-LPN-1267,Hammersmith Hospital,Connected,Fossil Gas,2.0,Connected,,Included in a signed contract,App G,N,1107
+WIMBLEDON,WIMB-LPN-1274,Charlton Lane 2,Previously awaiting completion of transmission reinforcements,Solar PV,99.9,31/12/2030,,Awaiting NESO Gated offer,App G,N,1109
+WIMBLEDON,WIMB-LPN-1270,"St. Georges Hospital, Blackshaw Road, SW17 0QT",Connected,Fossil Gas,2.5,Connected,,Included in a signed contract,App G,N,1111
+WYMONDLEY,WYMM-EPN-1308,"(ANM – N/A) Land South of Stevenage Road, Wymondley, SG4 7JJ",Previously awaiting completion of transmission reinforcements,Electricity Storage,80.0,31/10/2034,,Awaiting NESO Gated offer,App G,Y,1121
+WYMONDLEY,WYMM-EPN-1310,(ANM) Land at Buckland Est,Previously awaiting completion of transmission reinforcements,Solar PV & ES,49.9,31/10/2034,,Awaiting NESO Gated offer,App G,Y,1123
+WYMONDLEY,WYMM-EPN-1280,"Cavendish Rd 11KV Generation, Sevenage",Connected,Gas,8.0,Connected,,Included in a signed contract,App G,N,1128
+WYMONDLEY,WYMM-EPN-1281,"Baldock Rd, Letchworth, SG6 1UP",Connected,Electricity Storage,15.0,Connected,,Included in a signed contract,App G,N,1129
+WYMONDLEY,WYMM-EPN-1291,"North Herts Landfill Generation, Holwell",Connected,Landfill Gas,1.5,Connected,,Included in a signed contract,App G,N,1139
+WYMONDLEY,WYMM-EPN-1297,South Close Royston SG8 5UH,Connected,Gas,4.1,Connected,,Included in a signed contract,App G,N,1142

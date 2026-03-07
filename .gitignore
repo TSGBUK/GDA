@@ -2,9 +2,8 @@
 
 # Large data files
 # If large files are excluded here, they are in the repo alread chunked,
-# trying to keep MAX_FILE_SIZE < 1G 
-NESO/*/*.csv 
-NESO/*.csv
+# trying to keep MAX_FILE_SIZE < 1G
+# (Currently uploading all CSVs in batches)
 
 # GDA Specific Excludes.
 # What we exclude and why
@@ -82,7 +81,7 @@ ipython_config.py
 *.code-workspace
 
 # Data files
-*.csv
+# *.csv - Now uploading CSVs in batches
 *.parquet
 **/Parquet/
 
