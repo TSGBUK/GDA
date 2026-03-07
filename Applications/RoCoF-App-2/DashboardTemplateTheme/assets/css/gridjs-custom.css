@@ -1,0 +1,138 @@
+/* Custom Grid.js Dark Mode Styling */
+.dark .gridjs-wrapper {
+    background: #1f2937;
+    border-color: #374151;
+}
+
+.dark .gridjs-table {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+.dark .gridjs-th {
+    background: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+}
+
+.dark .gridjs-td {
+    background: #1f2937;
+    color: #f9fafb;
+    border-color: #374151;
+}
+
+.dark .gridjs-tr:hover .gridjs-td {
+    background: #374151;
+}
+
+.dark .gridjs-footer {
+    background: #1f2937;
+    border-color: #374151;
+    color: #f9fafb;
+}
+
+.dark .gridjs-pagination {
+    color: #f9fafb;
+}
+
+.dark .gridjs-pagination button {
+    background: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+}
+
+.dark .gridjs-pagination button:hover {
+    background: #4b5563;
+}
+
+.dark .gridjs-pagination button:disabled {
+    background: #1f2937;
+    color: #6b7280;
+}
+
+.dark .gridjs-search input {
+    background: #374151;
+    color: #f9fafb;
+    border-color: #4b5563;
+}
+
+.dark .gridjs-search input::placeholder {
+    color: #9ca3af;
+}
+
+/* Custom Badge Styles */
+.badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.dark .badge-success {
+    background: #064e3b;
+    color: #6ee7b7;
+}
+
+.badge-warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.dark .badge-warning {
+    background: #78350f;
+    color: #fcd34d;
+}
+
+.badge-danger {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.dark .badge-danger {
+    background: #7f1d1d;
+    color: #fca5a5;
+}
+
+.badge-info {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.dark .badge-info {
+    background: #1e3a8a;
+    color: #93c5fd;
+}
+
+.badge-primary {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.dark .badge-primary {
+    background: #312e81;
+    color: #c7d2fe;
+}
+
+/* Grid Container */
+.grid-container {
+    min-height: 400px;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.loading {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

@@ -1,0 +1,234 @@
+/* Invoice Table Enhancements */
+.invoice-table-wrapper {
+    overflow-x: auto;
+    border-radius: 0.5rem;
+}
+
+/* Status Badge Animations */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    transition: all 0.2s ease-in-out;
+}
+
+.status-badge:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Action Button Hover Effects */
+.action-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn:active {
+    transform: translateY(0);
+}
+
+/* Filter Component Styling */
+.filter-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-input,
+.filter-select {
+    transition: all 0.2s ease-in-out;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+/* Checkbox Styling */
+.invoice-checkbox {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.invoice-checkbox:hover {
+    transform: scale(1.1);
+}
+
+.invoice-checkbox:checked {
+    background-color: #6366f1;
+}
+
+/* Table Row Hover */
+.invoice-row {
+    transition: all 0.2s ease-in-out;
+}
+
+.invoice-row:hover {
+    background-color: rgba(99, 102, 241, 0.05);
+    transform: scale(1.01);
+}
+
+.dark .invoice-row:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+/* Stats Card Animation */
+.stats-card {
+    transition: all 0.3s ease-in-out;
+}
+
+.stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Pagination Button Styling */
+.pagination-btn {
+    transition: all 0.2s ease-in-out;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    transform: scale(1.05);
+    background-color: #6366f1;
+    color: white;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Export Button Animation */
+.export-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.export-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.export-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Loading State */
+.loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 3px solid #6366f1;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    to { transform: rotate(360deg); }
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 50;
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Invoice Modal */
+.invoice-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 51;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+/* Bulk Actions Bar */
+.bulk-actions-bar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .invoice-table-wrapper {
+        font-size: 0.875rem;
+    }
+
+    .action-btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+}

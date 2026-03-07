@@ -1,0 +1,62 @@
+.table-hover tbody tr {
+        transition: background-color 0.2s ease;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .dark .table-hover tbody tr:hover {
+        background-color: rgba(59, 130, 246, 0.1);
+    }
+
+    .table-striped tbody tr:nth-child(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    .dark .table-striped tbody tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in-row {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    .sortable th {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        padding-right: 2rem;
+    }
+
+    .sortable th:hover {
+        background-color: rgba(59, 130, 246, 0.05);
+    }
+
+    .sortable th::after {
+        content: '↕';
+        position: absolute;
+        right: 0.75rem;
+        opacity: 0.3;
+    }
+
+    .sortable th.sort-asc::after {
+        content: '↑';
+        opacity: 1;
+    }
+
+    .sortable th.sort-desc::after {
+        content: '↓';
+        opacity: 1;
+    }

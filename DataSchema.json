@@ -1,0 +1,625 @@
+{
+  "schemaVersion": "2.0.0",
+  "generatedOn": "2026-03-05",
+  "projectRoot": "GDA",
+  "pathModel": {
+    "canonicalDataRoot": "DataSources",
+    "notes": [
+      "Repository paths were refactored to DataSources/...",
+      "Some legacy scripts may still reference pre-refactor root-level dataset folders"
+    ]
+  },
+  "sourceFiles": {
+    "NESO": [
+      {
+        "name": "NESO Data Portal",
+        "portalPage": "https://www.neso.energy/data-portal",
+        "directDownload": "https://api.neso.energy",
+        "localRoot": "DataSources/NESO"
+      },
+      {
+        "name": "BMRS Demand Stream Reference",
+        "portalPage": "https://www.neso.energy/data-portal/demand",
+        "directDownload": "https://api.bmreports.com/BMRS"
+      }
+    ],
+    "NationalGrid": [
+      {
+        "name": "National Grid Connected Data Portal",
+        "portalPage": "https://connecteddata.nationalgrid.co.uk/",
+        "directDownload": "https://connecteddata.nationalgrid.co.uk/",
+        "localRoot": "DataSources/NationalGrid"
+      },
+      {
+        "name": "Local source list",
+        "portalPage": "https://connecteddata.nationalgrid.co.uk/",
+        "directDownload": "DataSources/NationalGrid/datasources.txt"
+      },
+      {
+        "name": "Live Primary source family",
+        "portalPage": "https://connecteddata.nationalgrid.co.uk/dataset?tags=primary",
+        "directDownload": "DataSources/NationalGrid/history/live-primary-*/**/*.csv"
+      },
+      {
+        "name": "Live GSP source family",
+        "portalPage": "https://connecteddata.nationalgrid.co.uk/dataset?tags=gsp",
+        "directDownload": "DataSources/NationalGrid/history/live-gsp-data-*/**/*.csv"
+      },
+      {
+        "name": "BSP source family",
+        "portalPage": "https://connecteddata.nationalgrid.co.uk/dataset?tags=bsp",
+        "directDownload": "DataSources/NationalGrid/history/bsp*/**/*.csv"
+      }
+    ],
+    "GridWatch": [
+      {
+        "name": "GridWatch",
+        "portalPage": "https://gridwatch.templar.co",
+        "directDownload": "https://gridwatch.templar.co",
+        "localRoot": "DataSources/GridWatch"
+      }
+    ],
+    "Weather": [
+      {
+        "name": "Open-Meteo Archive API",
+        "portalPage": "https://archive-api.open-meteo.com/v1/archive",
+        "directDownload": "https://archive-api.open-meteo.com/v1/archive",
+        "localRoot": "DataSources/Weather"
+      }
+    ]
+  },
+  "datasets": [
+    {
+      "id": "BalancingServices",
+      "displayName": "Balancing Services Costs",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/BalancingServices/*.csv",
+        "parquetPath": "DataSources/NESO/BalancingServices/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Columns evolve; includes settlement keys plus multiple balancing cost categories" },
+        "parquet": {
+          "columns": [
+            { "name": "SETT_DATE", "type": "string" },
+            { "name": "SETT_PERIOD", "type": "integer" },
+            { "name": "DatetimeUTC", "type": "datetime", "timezone": "UTC" }
+          ],
+          "dynamicColumns": {
+            "pattern": "all numeric cost columns except metadata/year",
+            "type": "number"
+          }
+        }
+      }
+    },
+    {
+      "id": "BSAD_AggregatedData",
+      "displayName": "BSAD Aggregated Data",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/BSAD_AggregatedData/**/*.csv",
+        "parquetPath": "DataSources/NESO/BSAD_AggregatedData/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BSAD_DissAggregatedData",
+      "displayName": "BSAD Dissaggregated Data",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/BSAD_DissAggregatedData/**/*.csv",
+        "parquetPath": "DataSources/NESO/BSAD_DissAggregatedData/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "BSAD_ForwardContracts",
+      "displayName": "BSAD Forward Contracts",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/BSAD_ForwardContracts/**/*.csv",
+        "parquetPath": "DataSources/NESO/BSAD_ForwardContracts/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "CarbonIntensityOfBalancingActions",
+      "displayName": "Carbon Intensity of Balancing Actions",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/CarbonIntensityOfBalancingActions/**/*.csv",
+        "parquetPath": "DataSources/NESO/CarbonIntensityOfBalancingActions/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "DemandData",
+      "displayName": "Demand Data",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal/demand" },
+      "storage": {
+        "rawPath": "DataSources/NESO/DemandData/demanddata_*.csv",
+        "parquetPath": "DataSources/NESO/DemandData/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": {
+          "columns": [
+            { "name": "SETTLEMENT_DATE", "type": "date" },
+            { "name": "SETTLEMENT_PERIOD", "type": "integer" },
+            { "name": "ND", "type": "number", "unit": "MW" },
+            { "name": "TSD", "type": "number", "unit": "MW" },
+            { "name": "ENGLAND_WALES_DEMAND", "type": "number", "unit": "MW" },
+            { "name": "EMBEDDED_WIND_GENERATION", "type": "number", "unit": "MW" },
+            { "name": "EMBEDDED_WIND_CAPACITY", "type": "number", "unit": "MW" },
+            { "name": "EMBEDDED_SOLAR_GENERATION", "type": "number", "unit": "MW" },
+            { "name": "EMBEDDED_SOLAR_CAPACITY", "type": "number", "unit": "MW" },
+            { "name": "NON_BM_STOR", "type": "number", "unit": "MW" },
+            { "name": "PUMP_STORAGE_PUMPING", "type": "number", "unit": "MW" },
+            { "name": "SCOTTISH_TRANSFER", "type": "number", "unit": "MW" },
+            { "name": "IFA_FLOW", "type": "number", "unit": "MW" },
+            { "name": "IFA2_FLOW", "type": "number", "unit": "MW" },
+            { "name": "BRITNED_FLOW", "type": "number", "unit": "MW" },
+            { "name": "MOYLE_FLOW", "type": "number", "unit": "MW" },
+            { "name": "EAST_WEST_FLOW", "type": "number", "unit": "MW" },
+            { "name": "NEMO_FLOW", "type": "number", "unit": "MW" },
+            { "name": "NSL_FLOW", "type": "number", "unit": "MW" },
+            { "name": "ELECLINK_FLOW", "type": "number", "unit": "MW" },
+            { "name": "VIKING_FLOW", "type": "number", "unit": "MW" },
+            { "name": "GREENLINK_FLOW", "type": "number", "unit": "MW" }
+          ]
+        },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Includes demand/interconnector columns plus DatetimeUTC and year partition" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EACEnduringAuctionCapability",
+      "displayName": "EAC Enduring Auction Capability",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/EACEnduringAuctionCapability/**/*.csv",
+        "parquetPath": "DataSources/NESO/EACEnduringAuctionCapability/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "EC-BR_AuctionResults",
+      "displayName": "EC-BR Auction Results",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/EC-BR_AuctionResults/**/*.csv",
+        "parquetPath": "DataSources/NESO/EC-BR_AuctionResults/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Frequency",
+      "displayName": "System Frequency",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal/frequency" },
+      "storage": {
+        "rawPath": "DataSources/NESO/Frequency/f-*.csv",
+        "parquetPath": "DataSources/NESO/Frequency/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": {
+          "notes": "Raw files may have dtm/f or Date/Value headers",
+          "normalizedColumns": [
+            { "name": "Date", "type": "datetime", "timezone": "UTC" },
+            { "name": "Value", "type": "number", "unit": "Hz" }
+          ]
+        },
+        "parquet": {
+          "columns": [
+            { "name": "Date", "type": "datetime", "timezone": "UTC" },
+            { "name": "Value", "type": "number", "unit": "Hz" },
+            { "name": "year", "type": "integer" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "HistoricalGenerationData",
+      "displayName": "Historical Fuel Generation",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/HistoricalGenerationData/df_fuel_ckan.csv",
+        "parquetPath": "DataSources/NESO/HistoricalGenerationData/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": {
+          "columns": [
+            { "name": "DATETIME", "type": "datetime", "timezone": "UTC" },
+            { "name": "GAS", "type": "number", "unit": "MW" },
+            { "name": "COAL", "type": "number", "unit": "MW" },
+            { "name": "NUCLEAR", "type": "number", "unit": "MW" },
+            { "name": "WIND", "type": "number", "unit": "MW" },
+            { "name": "WIND_EMB", "type": "number", "unit": "MW" },
+            { "name": "HYDRO", "type": "number", "unit": "MW" },
+            { "name": "IMPORTS", "type": "number", "unit": "MW" },
+            { "name": "BIOMASS", "type": "number", "unit": "MW" },
+            { "name": "OTHER", "type": "number", "unit": "MW" },
+            { "name": "SOLAR", "type": "number", "unit": "MW" },
+            { "name": "STORAGE", "type": "number", "unit": "MW" },
+            { "name": "GENERATION", "type": "number", "unit": "MW" },
+            { "name": "CARBON_INTENSITY", "type": "number", "unit": "gCO2/kWh" },
+            { "name": "LOW_CARBON", "type": "number", "unit": "MW" },
+            { "name": "ZERO_CARBON", "type": "number", "unit": "MW" },
+            { "name": "RENEWABLE", "type": "number", "unit": "MW" },
+            { "name": "FOSSIL", "type": "number", "unit": "MW" },
+            { "name": "GAS_perc", "type": "number", "unit": "%" },
+            { "name": "COAL_perc", "type": "number", "unit": "%" },
+            { "name": "NUCLEAR_perc", "type": "number", "unit": "%" },
+            { "name": "WIND_perc", "type": "number", "unit": "%" },
+            { "name": "WIND_EMB_perc", "type": "number", "unit": "%" },
+            { "name": "HYDRO_perc", "type": "number", "unit": "%" },
+            { "name": "IMPORTS_perc", "type": "number", "unit": "%" },
+            { "name": "BIOMASS_perc", "type": "number", "unit": "%" },
+            { "name": "OTHER_perc", "type": "number", "unit": "%" },
+            { "name": "SOLAR_perc", "type": "number", "unit": "%" },
+            { "name": "STORAGE_perc", "type": "number", "unit": "%" },
+            { "name": "GENERATION_perc", "type": "number", "unit": "%" },
+            { "name": "LOW_CARBON_perc", "type": "number", "unit": "%" },
+            { "name": "ZERO_CARBON_perc", "type": "number", "unit": "%" },
+            { "name": "RENEWABLE_perc", "type": "number", "unit": "%" },
+            { "name": "FOSSIL_perc", "type": "number", "unit": "%" }
+          ]
+        },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Generation converter retains source schema" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Inertia",
+      "displayName": "System Inertia",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/Inertia/*.csv",
+        "parquetPath": "DataSources/NESO/Inertia/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": {
+          "columns": [
+            { "name": "Settlement Date", "type": "date" },
+            { "name": "Settlement Period", "type": "integer" },
+            { "name": "Outturn Inertia", "type": "number", "unit": "GVAs" },
+            { "name": "Market Provided Inertia", "type": "number", "unit": "GVAs" }
+          ]
+        },
+        "parquet": {
+          "columns": [
+            { "name": "Settlement Date", "type": "string" },
+            { "name": "Settlement Period", "type": "integer" },
+            { "name": "Outturn Inertia", "type": "number", "unit": "GVAs" },
+            { "name": "Market Provided Inertia", "type": "number", "unit": "GVAs" },
+            { "name": "DatetimeUTC", "type": "datetime", "timezone": "UTC" },
+            { "name": "year", "type": "integer" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "InertiaCosts",
+      "displayName": "Inertia Costs",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/InertiaCosts/**/*.csv",
+        "parquetPath": "DataSources/NESO/InertiaCosts/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NonBM_AncillaryServiceDispatchPlatformInstructions",
+      "displayName": "Non-BM Ancillary Dispatch Instructions",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformInstructions/**/*.csv",
+        "parquetPath": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformInstructions/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NonBM_AncillaryServiceDispatchPlatformWindowPrices",
+      "displayName": "Non-BM Ancillary Window Prices",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformWindowPrices/**/*.csv",
+        "parquetPath": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformWindowPrices/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "OBP_NonBMPhysicalNotifications",
+      "displayName": "OBP Non-BM Physical Notifications",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/OBP_NonBMPhysicalNotifications/**/*.csv",
+        "parquetPath": "DataSources/NESO/OBP_NonBMPhysicalNotifications/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "OBP_ReserveAvailability",
+      "displayName": "OBP Reserve Availability",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/OBP_ReserveAvailability/**/*.csv",
+        "parquetPath": "DataSources/NESO/OBP_ReserveAvailability/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ORPS_ReactivePowerService",
+      "displayName": "ORPS Reactive Power Service",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/ORPS_ReactivePowerService/**/*.csv",
+        "parquetPath": "DataSources/NESO/ORPS_ReactivePowerService/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TransmissionEntryCpacity_TECRegister",
+      "displayName": "Transmission Entry Capacity TEC Register",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/TransmissionEntryCpacity_TECRegister/**/*.csv",
+        "parquetPath": "DataSources/NESO/TransmissionEntryCpacity_TECRegister/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "TransmissionLosses",
+      "displayName": "Transmission Losses",
+      "source": { "provider": "NESO", "url": "https://www.neso.energy/data-portal" },
+      "storage": {
+        "rawPath": "DataSources/NESO/TransmissionLosses/**/*.csv",
+        "parquetPath": "DataSources/NESO/TransmissionLosses/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Schema varies by publication release" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Retained as provided; year used for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "GridWatch",
+      "displayName": "GridWatch Snapshot Data",
+      "source": { "provider": "GridWatch", "url": "https://gridwatch.templar.co" },
+      "storage": {
+        "rawPath": "DataSources/GridWatch/gridwatch*.csv",
+        "parquetPath": "DataSources/GridWatch/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Raw snapshots may be stored as a single file or multiple chunked files" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Raw schema retained; year used only for partitioning" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "Weather",
+      "displayName": "UK Weather Data",
+      "source": { "provider": "Open-Meteo Archive API", "url": "https://archive-api.open-meteo.com/v1/archive" },
+      "storage": {
+        "rawPath": "DataSources/Weather/uk_weather_data_*.csv",
+        "parquetPath": "DataSources/Weather/Parquet",
+        "partitioning": "hive",
+        "partitionKey": "year"
+      },
+      "schema": {
+        "rawCsv": {
+          "columns": [
+            { "name": "Date", "type": "datetime", "timezone": "UTC" },
+            { "name": "Temperature_C", "type": "number", "unit": "C" },
+            { "name": "Wind_Speed_100m_kph", "type": "number", "unit": "kph" },
+            { "name": "Solar_Radiation_W_m2", "type": "number", "unit": "W/m2" }
+          ]
+        },
+        "parquet": {
+          "columns": [
+            { "name": "Date", "type": "datetime", "timezone": "UTC" },
+            { "name": "Temperature_C", "type": "number", "unit": "C" },
+            { "name": "Wind_Speed_100m_kph", "type": "number", "unit": "kph" },
+            { "name": "Solar_Radiation_W_m2", "type": "number", "unit": "W/m2" },
+            { "name": "year", "type": "integer" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NationalGrid_LivePrimary_All",
+      "displayName": "National Grid Live Primary (Merged)",
+      "source": { "provider": "NationalGrid", "url": "https://connecteddata.nationalgrid.co.uk/" },
+      "storage": {
+        "rawPath": "DataSources/NationalGrid/history/live-primary-*/**/*.csv",
+        "parquetPath": "DataSources/NationalGrid/Parquet/live_primary_all.parquet",
+        "format": "parquet"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Multiple primary-feeder CSV variants with evolving columns" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Merged feed retains source families + normalized metadata" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NationalGrid_LiveGSP_All",
+      "displayName": "National Grid Live GSP (Merged)",
+      "source": { "provider": "NationalGrid", "url": "https://connecteddata.nationalgrid.co.uk/" },
+      "storage": {
+        "rawPath": "DataSources/NationalGrid/history/live-gsp-data-*/**/*.csv",
+        "parquetPath": "DataSources/NationalGrid/Parquet/live_gsp_all.parquet",
+        "format": "parquet"
+      },
+      "schema": {
+        "rawCsv": { "notes": "Multiple GSP feeds with mostly aligned but evolving columns" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Merged feed retains source families + normalized metadata" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "NationalGrid_BSP_All",
+      "displayName": "National Grid BSP Power Flow (Merged)",
+      "source": { "provider": "NationalGrid", "url": "https://connecteddata.nationalgrid.co.uk/" },
+      "storage": {
+        "rawPath": "DataSources/NationalGrid/history/bsp*/**/*.csv",
+        "parquetPath": "DataSources/NationalGrid/Parquet/bsp_all.parquet",
+        "format": "parquet"
+      },
+      "schema": {
+        "rawCsv": { "notes": "BSP power-flow family with source-specific measurement columns" },
+        "parquet": {
+          "columns": [
+            { "name": "all raw columns", "type": "mixed", "description": "Merged feed retains source families + normalized metadata" }
+          ]
+        }
+      }
+    }
+  ]
+}

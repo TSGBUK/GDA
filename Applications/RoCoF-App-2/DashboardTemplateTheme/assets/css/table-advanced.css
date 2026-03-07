@@ -1,0 +1,100 @@
+/* Table Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.table-row-animate {
+    animation: fadeInUp 0.3s ease-out forwards;
+}
+
+/* Editable Cell */
+.editable-cell {
+    cursor: text;
+    position: relative;
+}
+
+.editable-cell:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+.editable-cell input {
+    width: 100%;
+    padding: 0.25rem;
+    border: 1px solid #6366f1;
+    border-radius: 0.25rem;
+    background: white;
+}
+
+.dark .editable-cell input {
+    background: #1f2937;
+    color: white;
+    border-color: #818cf8;
+}
+
+/* Resizable Column */
+.resizable-column {
+    position: relative;
+}
+
+.column-resizer {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 5px;
+    height: 100%;
+    cursor: col-resize;
+    background: transparent;
+    z-index: 10;
+}
+
+.column-resizer:hover {
+    background: #6366f1;
+}
+
+/* Draggable Row */
+.draggable-row {
+    cursor: move;
+}
+
+.draggable-row.dragging {
+    opacity: 0.5;
+}
+
+.draggable-row.drag-over {
+    border-top: 2px solid #6366f1;
+}
+
+/* Expandable Row */
+.expanded-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.expanded-content.show {
+    max-height: 500px;
+}
+
+/* Sticky Column */
+.sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 10;
+    background: white;
+}
+
+.dark .sticky-col {
+    background: #1f2937;
+}
+
+/* Multi-Select */
+.checkbox-all:indeterminate {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+}

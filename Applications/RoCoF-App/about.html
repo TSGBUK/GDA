@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoCoF App - About Data Transparency</title>
+  <link rel="stylesheet" href="/static/about.css" />
+</head>
+<body>
+  <main class="about-layout">
+    <section class="about-panel">
+      <div class="about-header">
+        <h1>RoCoF App — Data Transparency</h1>
+        <a class="toolbar-btn toolbar-link" href="/">Back to Dashboard</a>
+      </div>
+      <p class="about-intro">
+        This page documents every displayed metric: which values are raw source data, which are calculated in-app,
+        and the exact formulas used.
+      </p>
+
+      <h2>Data Sources</h2>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Used Fields</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Frequency parquet</td>
+              <td>Date, Value</td>
+              <td>Time series for frequency and RoCoF</td>
+            </tr>
+            <tr>
+              <td>HistoricalGenerationData parquet</td>
+              <td>DATETIME, GENERATION, fuel columns</td>
+              <td>Total generation and per-fuel dials</td>
+            </tr>
+            <tr>
+              <td>DemandData parquet</td>
+              <td>DatetimeUTC, ND, TSD, interconnector flow columns</td>
+              <td>Estimated demand and interconnector dials</td>
+            </tr>
+            <tr>
+              <td>Inertia parquet</td>
+              <td>DatetimeUTC, Outturn Inertia</td>
+              <td>Reference outturn inertia signal</td>
+            </tr>
+            <tr>
+              <td>Weather parquet</td>
+              <td>Date, Temperature_C, Wind_Speed_100m_kph, Solar_Radiation_W_m2</td>
+              <td>Environmental panel (temperature, wind, solar)</td>
+            </tr>
+            <tr>
+              <td>NonBM ASDP Instructions parquet</td>
+              <td>EntryID, ServiceType, InstructionStartDateTime, MW, IndicativePrice</td>
+              <td>Live table in center data drawer</td>
+            </tr>
+            <tr>
+              <td>NonBM ASDP Window Prices parquet</td>
+              <td>EntryID, ServiceType, SPStartDateTime, WindowPrice, PartyID</td>
+              <td>Live table in center data drawer</td>
+            </tr>
+            <tr>
+              <td>BSAD Aggregated parquet</td>
+              <td>Date, Settlement Period, EBCA (£), EBVA (MWh), BPA (£/MWh)</td>
+              <td>Live table in center data drawer</td>
+            </tr>
+            <tr>
+              <td>BSAD Forward Contracts parquet</td>
+              <td>Date, Settlement Period, BCA (£), BVA (MWh), SCA (£)</td>
+              <td>Live table in center data drawer</td>
+            </tr>
+            <tr>
+              <td>BSAD DissAggregated parquet</td>
+              <td>Table snapshot channel only</td>
+              <td>Supported with explicit no-data fallback when parquet is absent</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Metric Dictionary</h2>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead>
+            <tr>
+              <th>Display</th>
+              <th>Type</th>
+              <th>Definition / Formula</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Frequency (Hz)</td>
+              <td>Raw</td>
+              <td>Direct from frequency Value at each timestamp.</td>
+            </tr>
+            <tr>
+              <td>RoCoF (Hz/s)</td>
+              <td>Calculated</td>
+              <td>RoCoF = (f_end - f_start) / Δt, where Δt is seconds between adjacent frequency samples.</td>
+            </tr>
+            <tr>
+              <td>Total Generation (MW)</td>
+              <td>Raw</td>
+              <td>Generation value from nearest generation record in time.</td>
+            </tr>
+            <tr>
+              <td>Estimated Demand (MW)</td>
+              <td>Raw/Selected</td>
+              <td>Uses ND if present; otherwise uses TSD from nearest demand record.</td>
+            </tr>
+            <tr>
+              <td>Fuel Dial MW (per fuel)</td>
+              <td>Raw</td>
+              <td>Direct fuel-specific MW fields from generation data (GAS, COAL, NUCLEAR, etc.).</td>
+            </tr>
+            <tr>
+              <td>Interconnector Flow MW</td>
+              <td>Raw</td>
+              <td>Direct flow columns from demand data (IFA_FLOW, BRITNED_FLOW, etc.).</td>
+            </tr>
+            <tr>
+              <td>Net Interconnector Flow</td>
+              <td>Calculated</td>
+              <td>NET_INTERCONNECTOR_FLOW = Σ(all individual interconnector flows).</td>
+            </tr>
+            <tr>
+              <td>Grid RPM</td>
+              <td>Calculated</td>
+              <td>RPM = (Frequency / 50) × 3000.</td>
+            </tr>
+            <tr>
+              <td>Torque Demanded</td>
+              <td>Calculated</td>
+              <td>Torque_demand_Nm = TotalGeneration_MW × 3183.</td>
+            </tr>
+            <tr>
+              <td>Torque Actual</td>
+              <td>Calculated</td>
+              <td>RoCoF factor = clamp(1 - RoCoF/0.7, 0.2, 1.8), then Torque_actual = Torque_demand × RoCoF factor.</td>
+            </tr>
+            <tr>
+              <td>System Flow Status</td>
+              <td>Calculated</td>
+              <td>ΔMW = TotalGeneration - EstimatedDemand; thresholded labels: exporting, importing, balanced.</td>
+            </tr>
+            <tr>
+              <td>Estimated Mechanical Inertia by Fuel</td>
+              <td>Calculated</td>
+              <td>Inertia_fuel_GVA = (FuelMW × H_fuel) / 1000, with H from control inputs.</td>
+            </tr>
+            <tr>
+              <td>Available Mechanical Inertia</td>
+              <td>Calculated</td>
+              <td>Inertia_available = Σ(Inertia_fuel_GVA across all fuels).</td>
+            </tr>
+            <tr>
+              <td>Inertia Delta</td>
+              <td>Calculated</td>
+              <td>ΔInertia = Inertia_available - ConfiguredSystemGVA.</td>
+            </tr>
+            <tr>
+              <td>Frequency/RPM Factor</td>
+              <td>Calculated</td>
+              <td>Factor = Frequency / 50.</td>
+            </tr>
+            <tr>
+              <td>Instant Generation (Adjusted)</td>
+              <td>Calculated</td>
+              <td>InstantGeneration = TotalGeneration × (Frequency / 50).</td>
+            </tr>
+            <tr>
+              <td>Instant Generation Balance</td>
+              <td>Calculated</td>
+              <td>InstantBalance = InstantGeneration - EstimatedDemand.</td>
+            </tr>
+            <tr>
+              <td>Instant Demand Coverage (%)</td>
+              <td>Calculated</td>
+              <td>Coverage = (InstantGeneration / EstimatedDemand) × 100.</td>
+            </tr>
+            <tr>
+              <td>Instant Inertia (Adjusted)</td>
+              <td>Calculated</td>
+              <td>InstantInertia = AvailableMechanicalInertia × (RPM / 3000)².</td>
+            </tr>
+            <tr>
+              <td>Instant Inertia Delta</td>
+              <td>Calculated</td>
+              <td>InstantInertiaDelta = InstantInertia - ConfiguredSystemGVA.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Notes on Alignment and Fallbacks</h2>
+      <ul class="about-list">
+        <li>Generation, demand, and inertia values are matched to each frequency frame using nearest timestamp matching with tolerance.</li>
+        <li>Demand fallback logic uses TSD if ND is unavailable.</li>
+        <li>Non-finite values are sanitized before websocket transmission for JSON safety.</li>
+        <li>Charts retain the most recent 600 points (for example, 10 minutes at 1 frame per second).</li>
+        <li>Table datasets are matched by nearest timestamp and can legitimately show “No data available” if a dataset has no parquet rows for the selected window.</li>
+      </ul>
+
+      <h2>Data Examples (Headers + Sample Rows)</h2>
+
+      <h3>Frequency</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>Date</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>2014-01-01 00:00:00+00:00</td><td>50.031</td></tr>
+            <tr><td>2014-01-01 00:00:01+00:00</td><td>50.026</td></tr>
+            <tr><td>2014-01-01 00:00:02+00:00</td><td>50.019</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>HistoricalGenerationData</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>DATETIME</th><th>GENERATION</th><th>GAS</th><th>COAL</th><th>NUCLEAR</th><th>WIND</th></tr></thead>
+          <tbody>
+            <tr><td>2009-01-01 00:00:00+00:00</td><td>33577.0</td><td>8367.0</td><td>15037.0</td><td>7099.0</td><td>248.0</td></tr>
+            <tr><td>2009-01-01 00:30:00+00:00</td><td>33704.0</td><td>8495.0</td><td>15095.0</td><td>7088.0</td><td>229.0</td></tr>
+            <tr><td>2009-01-01 01:00:00+00:00</td><td>33603.0</td><td>8471.0</td><td>15088.0</td><td>7074.0</td><td>207.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>DemandData</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>DatetimeUTC</th><th>ND</th><th>TSD</th><th>IFA_FLOW</th><th>BRITNED_FLOW</th></tr></thead>
+          <tbody>
+            <tr><td>2001-01-01 00:00:00+00:00</td><td>38631</td><td>null</td><td>1495</td><td>null</td></tr>
+            <tr><td>2001-01-01 00:30:00+00:00</td><td>39808</td><td>null</td><td>1496</td><td>null</td></tr>
+            <tr><td>2001-01-01 01:00:00+00:00</td><td>40039</td><td>null</td><td>1511</td><td>null</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Inertia</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>DatetimeUTC</th><th>Outturn Inertia</th></tr></thead>
+          <tbody>
+            <tr><td>2017-04-01 00:00:00+00:00</td><td>215</td></tr>
+            <tr><td>2017-04-01 00:30:00+00:00</td><td>208</td></tr>
+            <tr><td>2017-04-01 01:00:00+00:00</td><td>209</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Weather</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>Date</th><th>Temperature_C</th><th>Wind_Speed_100m_kph</th><th>Solar_Radiation_W_m2</th></tr></thead>
+          <tbody>
+            <tr><td>2010-01-01 00:00:00+00:00</td><td>-9.3</td><td>21.8</td><td>0.0</td></tr>
+            <tr><td>2010-01-01 01:00:00+00:00</td><td>-9.4</td><td>21.5</td><td>0.0</td></tr>
+            <tr><td>2010-01-01 02:00:00+00:00</td><td>-9.6</td><td>21.3</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>NonBM ASDP Instructions</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>EntryID</th><th>ServiceType</th><th>InstructionStartDateTime</th><th>MW</th><th>IndicativePrice</th></tr></thead>
+          <tbody>
+            <tr><td>2078</td><td>Non-BM Fast Reserve</td><td>2020-12-01 00:07:00+00:00</td><td>40</td><td>65.0</td></tr>
+            <tr><td>2088</td><td>Non-BM Fast Reserve</td><td>2020-12-01 06:13:00+00:00</td><td>80</td><td>72.0</td></tr>
+            <tr><td>2079</td><td>Non-BM Fast Reserve</td><td>2020-12-01 00:07:00+00:00</td><td>60</td><td>70.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>NonBM ASDP Window Prices</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>EntryID</th><th>ServiceType</th><th>SPStartDateTime</th><th>WindowPrice</th><th>PartyID</th></tr></thead>
+          <tbody>
+            <tr><td>51278.0</td><td>Non-BM Fast Reserve</td><td>2025-01-28 16:00:00+00:00</td><td>124.0</td><td>HABITAT ENERGY LIMITED</td></tr>
+            <tr><td>51279.0</td><td>Non-BM Fast Reserve</td><td>2025-01-28 16:00:00+00:00</td><td>111.8</td><td>ENWL</td></tr>
+            <tr><td>51280.0</td><td>Non-BM Fast Reserve</td><td>2025-01-28 16:00:00+00:00</td><td>125.0</td><td>HABITAT ENERGY LIMITED</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>BSAD Aggregated</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>Date</th><th>Settlement Period</th><th>EBCA (£)</th><th>EBVA (MWh)</th><th>BPA (£/MWh)</th></tr></thead>
+          <tbody>
+            <tr><td>2013-04-01 00:00:00+00:00</td><td>1</td><td>0</td><td>0</td><td>0.0</td></tr>
+            <tr><td>2013-04-01 00:00:00+00:00</td><td>2</td><td>0</td><td>0</td><td>0.0</td></tr>
+            <tr><td>2013-04-01 00:00:00+00:00</td><td>3</td><td>0</td><td>0</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>BSAD Forward Contracts</h3>
+      <div class="about-table-wrap">
+        <table class="about-table">
+          <thead><tr><th>Date</th><th>Settlement Period</th><th>BCA (£)</th><th>BVA (MWh)</th><th>SCA (£)</th></tr></thead>
+          <tbody>
+            <tr><td>2016-04-01 00:00:00+00:00</td><td>1.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+            <tr><td>2016-04-01 00:00:00+00:00</td><td>2.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+            <tr><td>2016-04-01 00:00:00+00:00</td><td>3.0</td><td>0.0</td><td>0.0</td><td>0.0</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>BSAD DissAggregated</h3>
+      <p class="about-intro">No parquet rows currently available in this workspace, so the app shows a clear no-data state for this table.</p>
+    </section>
+  </main>
+</body>
+</html>

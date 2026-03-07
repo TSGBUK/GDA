@@ -1,0 +1,13 @@
+{
+  "name": "tsgb-data-scripts",
+  "version": "1.0.0",
+  "description": "Placeholder package for TSGB data-processing workspace. No JavaScript dependencies required; Python is used for all analysis.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "echo 'npm install complete. This project uses Python for data processing.'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "",
+  "license": "MIT"
+}

@@ -1,0 +1,422 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAtUtc": "2026-03-07T14:45:32.886719+00:00",
+  "files": {
+    "ukpn-live-faults": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-live-faults__export.csv",
+      "sizeBytes": 8271,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "grid-and-primary-sites": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\grid-and-primary-sites__export.csv",
+      "sizeBytes": 3453,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-dnoa": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-dnoa__export.csv",
+      "sizeBytes": 7292,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-embedded-capacity-register": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-embedded-capacity-register__export.csv",
+      "sizeBytes": 6551,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-secondary-sites": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-secondary-sites__export.csv",
+      "sizeBytes": 22068395,
+      "rowCount": 72750,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-07T16:10:20.887608+00:00",
+      "intervalSeconds": 14400
+    },
+    "ukpn-33kv-overhead-lines": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-33kv-overhead-lines__export.csv",
+      "sizeBytes": 3509,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-ltds-infrastructure-projects": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-ltds-infrastructure-projects__export.csv",
+      "sizeBytes": 9852,
+      "rowCount": 41,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-hv-overhead-lines-shapefile": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-hv-overhead-lines-shapefile__export.csv",
+      "sizeBytes": 27742198,
+      "rowCount": 102812,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-07T16:10:20.887608+00:00",
+      "intervalSeconds": 14400
+    },
+    "ukpn-flexibility-tender-data": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-flexibility-tender-data__export.csv",
+      "sizeBytes": 38041124,
+      "rowCount": 467615,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-08T12:10:20.887608+00:00",
+      "intervalSeconds": 86400
+    },
+    "ukpn-grid-supply-points-overview": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-grid-supply-points-overview__export.csv",
+      "sizeBytes": 1731,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-flexibility-dispatches": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-flexibility-dispatches__export.csv",
+      "sizeBytes": 2808,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-132kv-overhead-lines": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-132kv-overhead-lines__export.csv",
+      "sizeBytes": 3888,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-66kv-overhead-lines-shapefile": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-66kv-overhead-lines-shapefile__export.csv",
+      "sizeBytes": 4011,
+      "rowCount": 4,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-constraints-real-time-meter-readings": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-constraints-real-time-meter-readings__export.csv",
+      "sizeBytes": 1583,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-33kv-poles-towers": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-33kv-poles-towers__export.csv",
+      "sizeBytes": 2691,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-lv-overhead-lines-shapefile": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-lv-overhead-lines-shapefile__export.csv",
+      "sizeBytes": 48070229,
+      "rowCount": 213194,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-07T16:10:20.887608+00:00",
+      "intervalSeconds": 14400
+    },
+    "ukpn-132kv-poles-towers": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-132kv-poles-towers__export.csv",
+      "sizeBytes": 2394,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "dfes-network-headroom-report": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\dfes-network-headroom-report__export.csv",
+      "sizeBytes": 26498547,
+      "rowCount": 176580,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-07T16:10:20.887608+00:00",
+      "intervalSeconds": 14400
+    },
+    "ukpn-hv-poles": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-hv-poles__export.csv",
+      "sizeBytes": 51739082,
+      "rowCount": 275476,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-08T12:10:20.887608+00:00",
+      "intervalSeconds": 86400
+    },
+    "low-carbon-technologies": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\low-carbon-technologies__export.csv",
+      "sizeBytes": 1770,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-curtailment-events-site-specific": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-curtailment-events-site-specific__export.csv",
+      "sizeBytes": 2470,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-low-voltage-dnoa": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-low-voltage-dnoa__export.csv",
+      "sizeBytes": 1570,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ltds-table-3a-load-data-observed": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ltds-table-3a-load-data-observed__export.csv",
+      "sizeBytes": 1906,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-low-carbon-technologies-secondary": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-low-carbon-technologies-secondary__export.csv",
+      "sizeBytes": 2107,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-lv-poles": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-lv-poles__export.csv",
+      "sizeBytes": 65470096,
+      "rowCount": 360191,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-08T12:10:20.887608+00:00",
+      "intervalSeconds": 86400
+    },
+    "newsfeed": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\newsfeed__export.csv",
+      "sizeBytes": 2386,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-power-quality": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-power-quality__export.csv",
+      "sizeBytes": 1390,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-distribution-use-of-system-charges-annex-1": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-distribution-use-of-system-charges-annex-1__export.csv",
+      "sizeBytes": 3446,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ltds-table-5-generation": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ltds-table-5-generation__export.csv",
+      "sizeBytes": 1820,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-grid-supply-points": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-grid-supply-points__export.csv",
+      "sizeBytes": 259675,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ltds-table-3a-load-data-observed-transposed": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ltds-table-3a-load-data-observed-transposed__export.csv",
+      "sizeBytes": 1502,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-embedded-capacity-register-1-under-1mw": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-embedded-capacity-register-1-under-1mw__export.csv",
+      "sizeBytes": 6346,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-ehv-network-outages": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-ehv-network-outages__export.csv",
+      "sizeBytes": 1678,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "domain-dataset0": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\domain-dataset0__export.csv",
+      "sizeBytes": 494931,
+      "rowCount": 138,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn_secondary_postcode_area": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn_secondary_postcode_area__export.csv",
+      "sizeBytes": 490815547,
+      "rowCount": 74420,
+      "lastDownloadedUtc": "2026-03-07T12:10:20.887608+00:00",
+      "nextDownloadUtc": "2026-03-07T16:10:20.887608+00:00",
+      "intervalSeconds": 14400
+    },
+    "ukpn-appendix-g": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-appendix-g__export.csv",
+      "sizeBytes": 1767,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-net-zero-use-cases": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-net-zero-use-cases__export.csv",
+      "sizeBytes": 13904,
+      "rowCount": 30,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-open-streetworks": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-open-streetworks__export.csv",
+      "sizeBytes": 6206,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-smart-meter-consumption-substation": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-smart-meter-consumption-substation__export.csv",
+      "sizeBytes": 2258,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-smart-meter-consumption-lv-feeder": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-smart-meter-consumption-lv-feeder__export.csv",
+      "sizeBytes": 2201,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn_epn_vectorisation_delivery_plan": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn_epn_vectorisation_delivery_plan__export.csv",
+      "sizeBytes": 10954,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-distribution-use-of-system-charges-annex-2": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-distribution-use-of-system-charges-annex-2__export.csv",
+      "sizeBytes": 186025,
+      "rowCount": 1325,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-primary-transformers": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-primary-transformers__export.csv",
+      "sizeBytes": 2442,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-appendix-g-aggregated": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-appendix-g-aggregated__export.csv",
+      "sizeBytes": 920,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-grid-transformers": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-grid-transformers__export.csv",
+      "sizeBytes": 2479,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-iis": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-iis__export.csv",
+      "sizeBytes": 2237,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-proposed-streetworks": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-proposed-streetworks__export.csv",
+      "sizeBytes": 7445,
+      "rowCount": 10,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-grid-postcode-area": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-grid-postcode-area__export.csv",
+      "sizeBytes": 128909,
+      "rowCount": 1,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-idno-areas": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-idno-areas__export.csv",
+      "sizeBytes": 673289,
+      "rowCount": 230,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-licence-boundaries": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-licence-boundaries__export.csv",
+      "sizeBytes": 42,
+      "rowCount": 0,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn-local-authorities": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn-local-authorities__export.csv",
+      "sizeBytes": 101,
+      "rowCount": 0,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    },
+    "ukpn_primary_postcode_area": {
+      "path": "D:\\GDA\\DataSources\\UkPowerNetworks\\history\\uncategorized\\ukpn_primary_postcode_area__export.csv",
+      "sizeBytes": 246,
+      "rowCount": 0,
+      "lastDownloadedUtc": "2026-03-07T14:45:31.240349+00:00",
+      "nextDownloadUtc": "2026-03-07T15:45:31.240349+00:00",
+      "intervalSeconds": 3600
+    }
+  }
+}

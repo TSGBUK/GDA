@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoCoF Replay Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="left-panel sidebar" id="leftSidebar">
+      <div class="sidebar-header">
+        <h2>Menu</h2>
+        <button id="toggleLeftBtn" class="sidebar-toggle" type="button" aria-label="Collapse left sidebar">◀</button>
+      </div>
+      <div class="sidebar-content">
+        <div class="control-menu">
+          <div class="control-menu-title">Replay Controls</div>
+          <div class="controls controls-vertical">
+            <label>
+              System GVA
+              <input id="gvaInput" type="number" min="0" step="1" value="150" />
+            </label>
+            <label>
+              Gas H
+              <input id="hGasInput" type="number" min="0" step="0.1" value="5" />
+            </label>
+            <label>
+              Coal H
+              <input id="hCoalInput" type="number" min="0" step="0.1" value="6" />
+            </label>
+            <label>
+              Hydro H
+              <input id="hHydroInput" type="number" min="0" step="0.1" value="3" />
+            </label>
+            <label>
+              Mech H
+              <input id="hMechInput" type="number" min="0" step="0.1" value="2.5" />
+            </label>
+            <label>
+              FPS
+              <input id="fpsInput" type="number" min="1" max="240" step="1" value="30" />
+            </label>
+            <div class="control-row">
+              <button id="playBtn" type="button">Play</button>
+              <button id="pauseBtn" type="button">Pause</button>
+            </div>
+            <label>
+              JSON
+              <input id="jsonFileInput" type="file" accept="application/json" />
+            </label>
+          </div>
+        </div>
+
+        <div class="left-divider"></div>
+        <h2>Generation Dials</h2>
+        <div id="fuelDials" class="dial-grid"></div>
+        <div class="left-divider"></div>
+        <h2>Interconnectors</h2>
+        <div id="interconnectorDials" class="dial-grid"></div>
+      </div>
+    </section>
+
+    <section class="center-panel">
+      <div class="center-toolbar">
+        <button id="toggleLeftCenterBtn" class="toolbar-btn" type="button" aria-label="Toggle left sidebar">☰ Left</button>
+        <h1>RoCoF Replay</h1>
+        <button id="toggleRightCenterBtn" class="toolbar-btn" type="button" aria-label="Toggle right sidebar">Right ☰</button>
+      </div>
+      <div class="assumption-note">Assumption: 1 MW requires 3183 Nm torque</div>
+      <div class="center-row">
+        <div class="chart-panel">
+          <div class="freq-chart-title">RoCoF (real-time)</div>
+          <canvas id="rocofGauge" width="320" height="320"></canvas>
+          <div class="chart-readout">
+            <div id="rocofValue" class="value">0.000</div>
+            <div class="unit">Hz/s</div>
+          </div>
+        </div>
+        <div class="chart-panel">
+          <div class="freq-chart-title">Frequency (real-time)</div>
+          <canvas id="frequencyChart" width="320" height="320"></canvas>
+          <div class="chart-readout">
+            <div id="frequencyValue" class="value">50.000</div>
+            <div class="unit">Hz</div>
+          </div>
+        </div>
+        <div class="chart-panel">
+          <div class="freq-chart-title">Grid RPM (real-time)</div>
+          <canvas id="rpmChart" width="320" height="320"></canvas>
+          <div class="chart-readout">
+            <div id="rpmValue" class="value">3000</div>
+            <div class="unit">RPM</div>
+          </div>
+        </div>
+        <div class="chart-panel">
+          <div class="freq-chart-title">Grid Torque (real-time)</div>
+          <canvas id="torqueChart" width="320" height="320"></canvas>
+          <div class="chart-readout chart-readout-dual">
+            <div class="dual-line">Demanded: <span id="torqueDemandValue">--</span></div>
+            <div class="dual-line">Actual: <span id="torqueActualValue">--</span></div>
+            <div class="unit">MNm</div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        <input id="frameSlider" type="range" min="0" max="0" value="0" />
+        <div id="rocofStatus" class="status-chip status-stable">STABLE</div>
+        <div id="timestampLabel" class="timestamp">--</div>
+      </div>
+      <div class="console-panel">
+        <div class="console-title">Console</div>
+        <pre id="eventConsole" class="console-body">[ready] console initialized</pre>
+      </div>
+    </section>
+
+    <section class="right-panel sidebar" id="rightSidebar">
+      <div class="sidebar-header">
+        <h2>System Totals</h2>
+        <button id="toggleRightBtn" class="sidebar-toggle" type="button" aria-label="Collapse right sidebar">▶</button>
+      </div>
+      <div class="sidebar-content">
+        <div class="stat-card">
+          <div class="stat-label">Total Generation</div>
+          <div id="totalGeneration" class="stat-value">-- MW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Estimated Demand</div>
+          <div id="estimatedDemand" class="stat-value">-- MW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Frequency</div>
+          <div id="frequencyBand" class="stat-value">-- Hz</div>
+          <div id="frequencyStatus" class="status-inline status-stable">STABLE</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">System Flow</div>
+          <div id="systemFlow" class="stat-value">BALANCED</div>
+          <div id="systemFlowDetail" class="status-inline status-balanced">Δ 0 MW</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Inertia</div>
+          <div id="inertiaAvailable" class="stat-value">Available (Mechanical): -- GVA</div>
+          <div id="inertiaTarget" class="stat-sub">Target: -- GVA</div>
+          <div id="inertiaDiff" class="status-inline status-balanced">Δ -- GVA</div>
+        </div>
+        <div class="stat-card small">
+          <div class="stat-label">Frame</div>
+          <div id="frameCounter" class="stat-value">0 / 0</div>
+        </div>
+
+        <div class="right-divider"></div>
+        <h2>Instantaneous</h2>
+
+        <div class="stat-card">
+          <div class="stat-label">Frequency / RPM Factor</div>
+          <div id="instantFactor" class="stat-value">--</div>
+          <div class="stat-sub">Ratio relative to nominal 50 Hz / 3000 RPM</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Instant Generation (Adjusted)</div>
+          <div id="instantGeneration" class="stat-value">-- MW</div>
+          <div class="stat-sub">Nominal generation scaled by frequency factor</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Instant Generation Balance</div>
+          <div id="instantBalance" class="stat-value">-- MW</div>
+          <div id="instantBalanceStatus" class="status-inline status-balanced">BALANCED</div>
+          <canvas id="instantBalanceSparkline" class="instant-sparkline" width="300" height="72"></canvas>
+          <div class="stat-sub">Instant generation versus estimated demand</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Instant Inertia (Adjusted)</div>
+          <div id="instantInertia" class="stat-value">-- GVA</div>
+          <div class="stat-sub">Nominal mechanical inertia scaled by RPM squared</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Instant Demand Coverage</div>
+          <div id="instantCoverage" class="stat-value">-- %</div>
+          <div class="stat-sub">Adjusted generation as % of estimated demand</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Instant Inertia Delta</div>
+          <div id="instantInertiaDelta" class="stat-value">-- GVA</div>
+          <div id="instantInertiaDeltaStatus" class="status-inline status-balanced">IDEAL</div>
+          <div class="stat-sub">Instant inertia versus configured target</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

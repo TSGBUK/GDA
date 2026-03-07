@@ -1,0 +1,161 @@
+{
+  "root": "C:\\Users\\shir1\\Documents\\GitHub\\GDA",
+  "resample_rule": "1H",
+  "max_frequency_files": 6,
+  "row_stride": 8,
+  "rows": 4345,
+  "columns": 50,
+  "time_start": "2014-01-01 00:00:00+00:00",
+  "time_end": "2014-07-01 00:00:00+00:00",
+  "top_correlations": [
+    {
+      "feature": "freq_abs_dev_mean",
+      "corr": 0.9346808091570238,
+      "abs_corr": 0.9346808091570238
+    },
+    {
+      "feature": "freq_std",
+      "corr": 0.9231841336857355,
+      "abs_corr": 0.9231841336857355
+    },
+    {
+      "feature": "freq_outside_49p95_50p05_share",
+      "corr": 0.8840269070464285,
+      "abs_corr": 0.8840269070464285
+    },
+    {
+      "feature": "freq_max",
+      "corr": 0.6484478735079676,
+      "abs_corr": 0.6484478735079676
+    },
+    {
+      "feature": "freq_min",
+      "corr": -0.45971608578054773,
+      "abs_corr": 0.45971608578054773
+    },
+    {
+      "feature": "gen_COAL",
+      "corr": 0.32575225994997487,
+      "abs_corr": 0.32575225994997487
+    },
+    {
+      "feature": "weather_Temperature_C",
+      "corr": -0.3086355449851252,
+      "abs_corr": 0.3086355449851252
+    },
+    {
+      "feature": "gen_HYDRO",
+      "corr": 0.3059662963413125,
+      "abs_corr": 0.3059662963413125
+    },
+    {
+      "feature": "gen_COAL_perc",
+      "corr": 0.2814260684503471,
+      "abs_corr": 0.2814260684503471
+    },
+    {
+      "feature": "gen_ZERO_CARBON",
+      "corr": 0.2811555133448547,
+      "abs_corr": 0.2811555133448547
+    },
+    {
+      "feature": "gen_WIND",
+      "corr": 0.2811525481785658,
+      "abs_corr": 0.2811525481785658
+    },
+    {
+      "feature": "rocof_abs_p95",
+      "corr": 0.2515735046936019,
+      "abs_corr": 0.2515735046936019
+    },
+    {
+      "feature": "gen_CARBON_INTENSITY",
+      "corr": 0.24893550639079423,
+      "abs_corr": 0.24893550639079423
+    },
+    {
+      "feature": "demand_TSD",
+      "corr": 0.24843483454736034,
+      "abs_corr": 0.24843483454736034
+    },
+    {
+      "feature": "gen_RENEWABLE",
+      "corr": 0.24614844166539276,
+      "abs_corr": 0.24614844166539276
+    }
+  ],
+  "top_feature_importance": [
+    {
+      "feature": "freq_abs_dev_mean",
+      "importance": 0.6891221785466783
+    },
+    {
+      "feature": "freq_std",
+      "importance": 0.29607105616617313
+    },
+    {
+      "feature": "freq_outside_49p95_50p05_share",
+      "importance": 0.013739656488079186
+    },
+    {
+      "feature": "freq_max",
+      "importance": 7.621654328540152e-05
+    },
+    {
+      "feature": "freq_mean",
+      "importance": 6.736420696940219e-05
+    },
+    {
+      "feature": "freq_min",
+      "importance": 5.481959101203297e-05
+    },
+    {
+      "feature": "gen_HYDRO",
+      "importance": 5.2934010723241195e-05
+    },
+    {
+      "feature": "demand_BRITNED_FLOW",
+      "importance": 5.066112258820242e-05
+    },
+    {
+      "feature": "gen_CARBON_INTENSITY",
+      "importance": 4.052492960825581e-05
+    },
+    {
+      "feature": "rocof_abs_max",
+      "importance": 4.004927179953523e-05
+    },
+    {
+      "feature": "gen_NUCLEAR",
+      "importance": 3.4611848981901623e-05
+    },
+    {
+      "feature": "gen_COAL",
+      "importance": 3.343909888739401e-05
+    },
+    {
+      "feature": "demand_IFA_FLOW",
+      "importance": 3.1458087892891915e-05
+    },
+    {
+      "feature": "demand_NET_INTERCONNECTOR_FLOW",
+      "importance": 3.016791670998497e-05
+    },
+    {
+      "feature": "weather_Temperature_C",
+      "importance": 2.9202197802426147e-05
+    }
+  ],
+  "generation_mix_reports": [
+    "gen_GAS_perc",
+    "gen_WIND_perc",
+    "gen_FOSSIL_perc",
+    "gen_LOW_CARBON_perc",
+    "gen_RENEWABLE_perc"
+  ],
+  "outputs": {
+    "timeseries": "C:\\Users\\shir1\\Documents\\GitHub\\GDA\\MachineLearning\\Patternator\\output\\patternator_timeseries.csv",
+    "correlations": "C:\\Users\\shir1\\Documents\\GitHub\\GDA\\MachineLearning\\Patternator\\output\\top_correlations.csv",
+    "feature_importance": "C:\\Users\\shir1\\Documents\\GitHub\\GDA\\MachineLearning\\Patternator\\output\\feature_importance.csv"
+  }
+}

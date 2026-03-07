@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RoCoF App Stream</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="layout">
+    <section class="left-panel sidebar" id="leftSidebar">
+      <div class="sidebar-header">
+        <h2>Menu</h2>
+        <button id="toggleLeftBtn" class="sidebar-toggle" type="button" aria-label="Collapse left sidebar">◀</button>
+      </div>
+      <div class="sidebar-content">
+        <details class="drawer-section" open>
+          <summary>Stream Controls</summary>
+          <div class="drawer-body">
+            <div class="control-menu">
+              <div class="controls controls-vertical">
+                <label>
+                  WS URL
+                  <input id="wsUrlInput" type="text" value="ws://127.0.0.1:8765/ws/replay" />
+                </label>
+                <label>
+                  Start Date
+                  <input id="startDateInput" type="datetime-local" />
+                </label>
+                <label>
+                  Base FPS
+                  <input id="fpsInput" type="number" min="1" max="144" step="1" value="30" />
+                </label>
+                <div class="control-menu-title">Playback Speed</div>
+                <div class="speed-grid">
+                  <button id="slow4Btn" class="speed-btn" type="button">0.25x</button>
+                  <button id="slow2Btn" class="speed-btn" type="button">0.5x</button>
+                  <button id="normalSpeedBtn" class="speed-btn active" type="button">1x</button>
+                  <button id="fast2Btn" class="speed-btn" type="button">2x</button>
+                  <button id="fast4Btn" class="speed-btn" type="button">4x</button>
+                </div>
+                <div id="playbackInfo" class="stat-sub">Base 30 FPS • Speed 1x • Effective 30 FPS</div>
+                <label>
+                  System GVA
+                  <input id="gvaInput" type="number" min="0" step="1" value="150" />
+                </label>
+                <label>
+                  Gas H
+                  <input id="hGasInput" type="number" min="0" step="0.1" value="5" />
+                </label>
+                <label>
+                  Coal H
+                  <input id="hCoalInput" type="number" min="0" step="0.1" value="6" />
+                </label>
+                <label>
+                  Hydro H
+                  <input id="hHydroInput" type="number" min="0" step="0.1" value="3" />
+                </label>
+                <label>
+                  Nuclear H
+                  <input id="hNuclearInput" type="number" min="0" step="0.1" value="6" />
+                </label>
+                <label>
+                  Mech H
+                  <input id="hMechInput" type="number" min="0" step="0.1" value="2.5" />
+                </label>
+                <div class="control-row stream-row">
+                  <button id="connectBtn" type="button">Connect</button>
+                  <button id="disconnectBtn" type="button">Disconnect</button>
+                </div>
+                <div class="control-row stream-row">
+                  <button id="startBtn" type="button">Start</button>
+                  <button id="stopBtn" type="button">Stop</button>
+                </div>
+                <div class="control-menu-title">Seek Back</div>
+                <div class="seek-grid">
+                  <button id="back60sBtn" class="speed-btn" type="button">-60s</button>
+                  <button id="back15mBtn" class="speed-btn" type="button">-15m</button>
+                  <button id="back30mBtn" class="speed-btn" type="button">-30m</button>
+                </div>
+                <div id="connectionStatus" class="status-inline status-balanced">DISCONNECTED</div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Generation Dials</summary>
+          <div class="drawer-body">
+            <div id="fuelDials" class="dial-grid"></div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Interconnectors</summary>
+          <div class="drawer-body">
+            <div id="interconnectorDials" class="dial-grid"></div>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="center-panel">
+      <div class="center-toolbar">
+        <button id="toggleLeftCenterBtn" class="toolbar-btn" type="button" aria-label="Toggle left sidebar">☰ Left</button>
+        <h1>RoCoF App Stream</h1>
+        <div class="toolbar-group">
+          <a class="toolbar-btn toolbar-link" href="/about">About Data</a>
+          <button id="toggleRightCenterBtn" class="toolbar-btn" type="button" aria-label="Toggle right sidebar">Right ☰</button>
+        </div>
+      </div>
+      <div class="live-strip">
+        <div id="rocofStatus" class="status-chip status-stable">STABLE</div>
+        <div id="timestampLabel" class="timestamp live-ts">--</div>
+      </div>
+      <div class="assumption-note">WebSocket playback at 1-second intervals from selected start date</div>
+      <div class="perf-strip" id="perfStrip">
+        <div class="perf-item">Render FPS: <span id="perfRenderFps">--</span></div>
+        <div class="perf-item">WS Frames/s: <span id="perfWsFps">--</span></div>
+        <div class="perf-item">Dropped Frames: <span id="perfDropped">0</span></div>
+      </div>
+      <details class="drawer-section center-drawer" open>
+        <summary>Charts</summary>
+        <div class="drawer-body">
+          <div class="center-row">
+            <div class="chart-panel">
+              <div class="freq-chart-title">RoCoF (real-time)</div>
+              <canvas id="rocofGauge" width="320" height="320"></canvas>
+              <div class="chart-readout">
+                <div id="rocofValue" class="value">0.000</div>
+                <div class="unit">Hz/s</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Frequency (real-time)</div>
+              <canvas id="frequencyChart" width="320" height="320"></canvas>
+              <div class="chart-readout">
+                <div id="frequencyValue" class="value">50.000</div>
+                <div class="unit">Hz</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Grid RPM (real-time)</div>
+              <canvas id="rpmChart" width="320" height="320"></canvas>
+              <div class="chart-readout">
+                <div id="rpmValue" class="value">3000</div>
+                <div class="unit">RPM</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Grid Torque (real-time)</div>
+              <canvas id="torqueChart" width="320" height="320"></canvas>
+              <div class="chart-readout chart-readout-dual">
+                <div class="dual-line">Demanded: <span id="torqueDemandValue">--</span></div>
+                <div class="dual-line">Actual: <span id="torqueActualValue">--</span></div>
+                <div class="unit">MNm</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Instant Generation Balance (real-time)</div>
+              <canvas id="instantBalanceChart" width="320" height="320"></canvas>
+              <div class="chart-readout">
+                <div id="instantBalance" class="value">--</div>
+                <div class="unit">MW</div>
+                <div id="instantBalanceStatus" class="status-inline status-balanced">BALANCED</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Instant Demand Coverage (real-time)</div>
+              <canvas id="instantCoverageChart" width="320" height="320"></canvas>
+              <div class="chart-readout">
+                <div id="instantCoverage" class="value">--</div>
+                <div class="unit">%</div>
+              </div>
+            </div>
+            <div class="chart-panel">
+              <div class="freq-chart-title">Transmission Losses (all points)</div>
+              <canvas id="transmissionLossesChart" width="320" height="320"></canvas>
+              <div class="chart-readout chart-readout-dual">
+                <div class="dual-line">Monthly GB Total: <span id="transMonthlyGb">--</span></div>
+                <div class="dual-line">FY GB Total: <span id="transFyGb">--</span></div>
+                <div class="unit">TWh</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="drawer-section center-drawer" open>
+        <summary>National Grid Site Tables</summary>
+        <div class="drawer-body">
+          <div class="table-grid">
+            <section class="table-card">
+              <h3>Live Primary (Site-Aligned)</h3>
+              <div id="tblNgPrimaryStatus" class="table-status">Waiting for stream data…</div>
+              <div class="table-wrap"><table id="tblNgPrimary" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>Live GSP (Site-Aligned)</h3>
+              <div id="tblNgGspStatus" class="table-status">Waiting for stream data…</div>
+              <div class="table-wrap"><table id="tblNgGsp" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>BSP (Site-Aligned)</h3>
+              <div id="tblNgBspStatus" class="table-status">Waiting for stream data…</div>
+              <div class="table-wrap"><table id="tblNgBsp" class="data-table"></table></div>
+            </section>
+          </div>
+        </div>
+      </details>
+
+      <details class="drawer-section center-drawer" open>
+        <summary>Console & Data Tables</summary>
+        <div class="drawer-body">
+          <div class="console-panel console-panel-tall">
+            <div class="console-title">Console</div>
+            <pre id="eventConsole" class="console-body">[events] ready</pre>
+          </div>
+
+          <div class="table-grid">
+            <section class="table-card">
+              <h3>NonBM ASDP Instructions</h3>
+              <div id="tblNonbmInstructionsStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblNonbmInstructions" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>NonBM ASDP Window Prices</h3>
+              <div id="tblNonbmPricesStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblNonbmPrices" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>BSAD Aggregated</h3>
+              <div id="tblBsadAggStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblBsadAgg" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>BSAD DissAggregated</h3>
+              <div id="tblBsadDissStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblBsadDiss" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>BSAD Forward Contracts</h3>
+              <div id="tblBsadFwdStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblBsadFwd" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>OBP Source 1</h3>
+              <div id="tblObp1Status" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblObp1" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>OBP Source 2</h3>
+              <div id="tblObp2Status" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblObp2" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>ORPS Reactive Power Service</h3>
+              <div id="tblOrpsStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblOrps" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>Transmission Losses Monthly</h3>
+              <div id="tblTransMonthlyStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblTransMonthly" class="data-table"></table></div>
+            </section>
+            <section class="table-card">
+              <h3>Transmission Losses Financial Year</h3>
+              <div id="tblTransFyStatus" class="table-status">Loading…</div>
+              <div class="table-wrap"><table id="tblTransFy" class="data-table"></table></div>
+            </section>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="right-panel sidebar" id="rightSidebar">
+      <div class="sidebar-header">
+        <h2>System Totals</h2>
+        <button id="toggleRightBtn" class="sidebar-toggle" type="button" aria-label="Collapse right sidebar">▶</button>
+      </div>
+      <div class="sidebar-content">
+        <details class="drawer-section" open>
+          <summary>System Totals</summary>
+          <div class="drawer-body drawer-grid">
+            <div class="stat-card">
+              <div class="stat-label">Total Generation</div>
+              <div id="totalGeneration" class="stat-value">-- MW</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Estimated Demand</div>
+              <div id="estimatedDemand" class="stat-value">-- MW</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Frequency</div>
+              <div id="frequencyBand" class="stat-value">-- Hz</div>
+              <div id="frequencyStatus" class="status-inline status-stable">STABLE</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">System Flow</div>
+              <div id="systemFlow" class="stat-value">BALANCED</div>
+              <div id="systemFlowDetail" class="status-inline status-balanced">Δ 0 MW</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Inertia</div>
+              <div id="inertiaAvailable" class="stat-value">Available (Mechanical): -- GVA</div>
+              <div id="inertiaTarget" class="stat-sub">Target: -- GVA</div>
+              <div id="inertiaDiff" class="status-inline status-balanced">Δ -- GVA</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Instantaneous</summary>
+          <div class="drawer-body drawer-grid">
+            <div class="stat-card">
+              <div class="stat-label">Frequency / RPM Factor</div>
+              <div id="instantFactor" class="stat-value">--</div>
+              <div class="stat-sub">Ratio relative to nominal 50 Hz / 3000 RPM</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Instant Generation (Adjusted)</div>
+              <div id="instantGeneration" class="stat-value">-- MW</div>
+              <div class="stat-sub">Nominal generation scaled by frequency factor</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Instant Inertia (Adjusted)</div>
+              <div id="instantInertia" class="stat-value">-- GVA</div>
+              <div class="stat-sub">Nominal mechanical inertia scaled by RPM squared</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Instant Inertia Delta</div>
+              <div id="instantInertiaDelta" class="stat-value">-- GVA</div>
+              <div id="instantInertiaDeltaStatus" class="status-inline status-balanced">IDEAL</div>
+              <div class="stat-sub">Instant inertia versus configured target</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Environmental</summary>
+          <div class="drawer-body drawer-grid">
+            <div class="stat-card small">
+              <div class="stat-label">Temperature</div>
+              <div id="weatherTemp" class="stat-value">-- °C</div>
+            </div>
+            <div class="stat-card small">
+              <div class="stat-label">Wind Speed (100m)</div>
+              <div id="weatherWind" class="stat-value">-- kph</div>
+            </div>
+            <div class="stat-card small">
+              <div class="stat-label">Solar Radiation</div>
+              <div id="weatherSolar" class="stat-value">-- W/m²</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Estimated CO2 Emissions</div>
+              <div id="co2Estimate" class="stat-value">-- tCO2/h</div>
+              <div class="stat-sub">Calculated as 0.38 tons per MWh × total generation MW</div>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Stability Regime</summary>
+          <div class="drawer-body drawer-grid">
+            <div class="stat-card">
+              <div class="stat-label">Stability Mode</div>
+              <div id="stabilityMode" class="stat-value">--</div>
+              <div id="stabilityModeChip" class="status-inline status-balanced">Awaiting data</div>
+              <div id="stabilityDeltaDetail" class="stat-sub">Δ -- MW (deadband ±500 MW)</div>
+            </div>
+
+            <div class="stat-card small">
+              <div class="stat-label">Fossil Fleet</div>
+              <div id="fossilTotalMw" class="stat-value">-- MW</div>
+              <div class="dial-bar"><div id="fossilTotalFill" class="dial-fill"></div></div>
+            </div>
+
+            <div class="stat-card small">
+              <div class="stat-label">Renewable Fleet</div>
+              <div id="renewableTotalMw" class="stat-value">-- MW</div>
+              <div class="dial-bar"><div id="renewableTotalFill" class="dial-fill"></div></div>
+            </div>
+
+            <div class="stat-card small">
+              <div class="stat-label">Renewables / Fossil</div>
+              <div id="renewablesRatio" class="stat-value">--</div>
+              <div class="stat-sub">Instant fuel mix ratio</div>
+            </div>
+
+            <div class="stat-card small">
+              <div class="stat-label">Outturn Inertia</div>
+              <div id="stabilityOutturnInertia" class="stat-value">-- GVA</div>
+            </div>
+
+            <div class="stat-card small">
+              <div class="stat-label">Calculated Inertia</div>
+              <div id="stabilityCalculatedInertia" class="stat-value">-- GVA</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Gas Burning for Stability Margin</div>
+              <div id="gasStabilityMargin" class="stat-value">--</div>
+              <div id="gasStabilityMarginChip" class="status-inline status-balanced">Awaiting data</div>
+              <div id="gasStabilityMarginDetail" class="stat-sub">Rule pending…</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Fuel Mix Trend</div>
+              <canvas id="stabilityMixChart" class="regime-chart regime-spark" width="260" height="72"></canvas>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-label">Inertia Comparison</div>
+              <canvas id="stabilityInertiaChart" class="regime-chart regime-spark" width="260" height="72"></canvas>
+            </div>
+          </div>
+        </details>
+
+        <details class="drawer-section" open>
+          <summary>Finance</summary>
+          <div class="drawer-body drawer-grid">
+            <div class="stat-card small">
+              <div class="stat-label">Transmission Monthly NGET</div>
+              <div id="transMonthlyNget" class="stat-value">-- TWh</div>
+            </div>
+            <div class="stat-card small">
+              <div class="stat-label">Transmission Monthly SPT</div>
+              <div id="transMonthlySpt" class="stat-value">-- TWh</div>
+            </div>
+            <div class="stat-card small">
+              <div class="stat-label">Transmission Monthly SHETL</div>
+              <div id="transMonthlyShetl" class="stat-value">-- TWh</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Transmission Monthly GB Total</div>
+              <div id="transMonthlyTotal" class="stat-value">-- TWh</div>
+              <div id="transMonthlyMeta" class="stat-sub">--</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Transmission FY GB Total</div>
+              <div id="transFyTotal" class="stat-value">-- TWh</div>
+              <div id="transFyMeta" class="stat-sub">--</div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
