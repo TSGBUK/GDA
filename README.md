@@ -1,299 +1,735 @@
-# GDA (Grid Data Analysis)
 
-GDA is a UK grid intelligence workspace built on **real public electricity-system data**.
+# Grid Data Analysis (GDA)
 
-It combines:
-- multi-source grid telemetry and market datasets,
-- conversion + validation pipelines,
-- ML expert training for pattern/event discovery,
-- replay tooling (web and Android) for high-resolution system-state playback.
+## A Workspace for Understanding the UK Electricity Grid
 
-The core intent is to detect patterns, emerging events, and system-state shifts across frequency, demand, generation mix, inertia, balancing activity, and weather drivers.
+**GDA (Grid Data Analysis)** is an experimental research and analysis environment built around **publicly available UK electricity system data**.
 
----
+The goal of this project is simple in concept but ambitious in execution:
 
-## Repository Focus
+> Given a wide collection of independent grid signals, estimate and reconstruct the **most likely operational state of the UK grid at any moment in time**.
 
-This repository is organized around four operational layers:
+To achieve this, GDA aggregates multiple public data sources and builds a pipeline that allows those signals to be:
 
-1. **Data ingestion + normalization** from public providers (NESO, National Grid, GridWatch, Open-Meteo).
-2. **Storage harmonization** into schema-aware CSV/Parquet structures.
-3. **ML experts** trained per-domain plus cross-domain fusion models.
-4. **Replay systems** that merge signals into frame-based timelines and update at 1-second cadence for detailed playback.
+* ingested
+* cleaned and normalized
+* merged into aligned time-series datasets
+* analyzed with machine learning models
+* replayed visually to explore system behaviour over time
+
+The repository acts as a **complete workspace for grid-state analysis**, combining data engineering, machine learning, and visualization tooling.
 
 ---
 
-## Refactored Path Model (Important)
+# What This Project Tries To Do
 
-Canonical data location is now:
+The UK electricity grid is an incredibly complex system. Many different signals exist that describe its behaviour:
 
-- `DataSources/...`
+* system frequency
+* electricity demand
+* generation mix
+* grid inertia
+* balancing actions
+* weather conditions
+* interconnector flows
+* reserve services
+* transmission losses
 
-Application/tooling location is now:
+Individually these signals provide **partial insight** into grid behaviour.
+But when they are **combined and aligned**, they begin to reveal deeper patterns.
 
-- `Applications/...`
+GDA attempts to answer questions like:
 
-Machine learning location:
+* What events precede **frequency disturbances**?
+* How does **generation mix affect system inertia**?
+* Do weather patterns correlate with **balancing activity**?
+* What signals appear **before system stress or instability**?
 
-- `MachineLearning/...`
+In essence, the system behaves like a **very crude state estimator**:
 
-Some legacy docs and scripts still reference older root-level paths such as `Frequency/...`, `DemandData/...`, `DataVisualizations/...`, etc.  
-When in doubt, use this README + `DataSchema.json` as the canonical map.
+> Given a collection of inputs, what was the *likely operational state of the grid* at time **T**?
 
----
+This repository provides the tooling required to:
 
-## Top-Level Structure
-
-- `Applications/`  
-  Web dashboards, replay apps, Android app, and site assets.
-
-- `DataSources/`  
-  Primary data lake for public-source raw files, processors, and parquet outputs.
-
-- `MachineLearning/`  
-  Pipeline utilities, notebooks, pattern surfacing, and expert trainers.
-
-- `Random/`  
-  Focused analysis and derivation tools (including RoCoF derivation/replay payload generation).
-
-- `Scripts/`  
-  Workspace-wide utilities (conversion orchestration, schema validation, setup verification, CSV splitting).
-
-- `DataSchema.json`  
-  Structured schema and source contract for core datasets.
-
-- `DATASOURCES.md`  
-  Human-readable source reference summary.
+* process the raw data
+* discover patterns
+* train domain-specific machine learning models
+* replay events and inspect system behaviour visually
 
 ---
 
-## Public Data Sources and What They Contain
+# High-Level Architecture
 
-### 1) NESO (`DataSources/NESO/`)
+The repository is organized around **four primary operational layers**.
 
-Primary operational datasets used for analytics and ML training:
+## 1. Data Ingestion
 
-- `BalancingServices/`  
-  Balancing service cost categories (energy imbalance, frequency control, reserve, constraints, etc.).
+Raw datasets are collected from multiple public providers, including:
 
-- `DemandData/`  
-  Settlement-period demand and embedded generation estimates, plus interconnector flows.
+* NESO
+* National Grid
+* GridWatch
+* Open-Meteo weather archive
 
-- `Frequency/`  
-  High-frequency system frequency measurements (`Hz`) used for RoCoF/event analysis.
-
-- `HistoricalGenerationData/`  
-  Fuel mix and system generation timeline (gas, coal, nuclear, wind, solar, imports, carbon intensity, etc.).
-
-- `Inertia/` and `InertiaCosts/`  
-  Market-provided and outturn inertia fields (and associated related costs where available).
-
-- `BSAD_AggregatedData/`, `BSAD_DissAggregatedData/`, `BSAD_ForwardContracts/`  
-  Balancing services adjustment and forward contract datasets.
-
-- `CarbonIntensityOfBalancingActions/`  
-  Carbon impact context around balancing actions.
-
-- `NonBM_AncillaryServiceDispatchPlatformInstructions/` and `NonBM_AncillaryServiceDispatchPlatformWindowPrices/`  
-  Non-BM ancillary dispatch records and pricing windows.
-
-- `OBP_NonBMPhysicalNotifications/`, `OBP_ReserveAvailability/`, `ORPS_ReactivePowerService/`, `TransmissionLosses/`, `EACEnduringAuctionCapability/`, `EC-BR_AuctionResults/`, `TransmissionEntryCpacity_TECRegister/`  
-  Additional operational/market layers used in merged replay context and advanced modeling.
-
-### 2) National Grid (`DataSources/NationalGrid/`)
-
-Connected Data Portal synchronization with:
-
-- `history/` raw historical pulls,
-- `Processors/` transformation scripts,
-- `Parquet/` merged parquet outputs.
-
-Schema tracks merged families such as:
-- Live Primary feeds,
-- Live GSP feeds,
-- BSP power flow feeds.
-
-### 3) GridWatch (`DataSources/GridWatch/`)
-
-Snapshot-style grid state files (chunked CSVs in this workspace), with processors for parquet conversion and downstream learning.
-
-### 4) Weather (`DataSources/Weather/`)
-
-Open-Meteo archive-derived weather timeline (UTC), including:
-- temperature,
-- 100m wind speed,
-- direct solar radiation.
-
-Includes raw CSV, parquet conversion, and query tooling.
+Each provider publishes data in different formats and time resolutions.
+The ingestion layer standardizes these sources and prepares them for analysis.
 
 ---
 
-## Data Contracts and Schema
+## 2. Data Normalization and Storage
 
-`DataSchema.json` defines:
+After ingestion, datasets are:
 
-- source metadata and URLs,
-- dataset identifiers,
-- expected raw columns,
-- normalized parquet conventions,
-- partitioning expectations (typically hive partitioning by `year`).
+* cleaned
+* validated
+* normalized into consistent schemas
+* converted to **Parquet** or structured CSV formats
 
-Core schema dataset IDs include:
+The normalized datasets become the **data lake** used by downstream machine learning and replay systems.
 
-- `BalancingServices`
-- `DemandData`
-- `Frequency`
-- `GridwatchData`
-- `HistoricalGenerationData`
-- `Inertia`
-- `Weather`
-- `NationalGrid_LivePrimary_All`
-- `NationalGrid_LiveGSP_All`
-- `NationalGrid_BSP_All`
+This stage ensures that:
 
-Use `Scripts/validate_data_schema.py` to detect schema drift between actual files and declared expectations.
+* timestamps align
+* column formats are consistent
+* partitions are organized for fast querying
 
 ---
 
-## Processing and Utility Tooling
+## 3. Machine Learning Experts
 
-### Conversion orchestration
+Rather than building one large model, the project trains **domain-specific expert models**.
 
-- `Scripts/run_parquet_conversions.py`  
-  Discovers all `parquet_data_conversion.py` scripts and optionally executes them in batch.
+Each expert focuses on a particular signal family:
 
-### Schema checks
+* frequency behaviour
+* inertia patterns
+* demand shifts
+* generation mix changes
+* balancing activity
+* weather interactions
 
-- `Scripts/validate_data_schema.py`  
-  Validates raw/parquet shapes against `DataSchema.json`.
-
-### Environment verification
-
-- `Scripts/verify_setup.py`  
-  Verifies Python/data/optional GPU dependencies.
-
-### Data management helpers
-
-- `Scripts/split_csv.py` for large CSV chunking.
-- `Scripts/check_parquet.py` for parquet folder scans/cleanup.
-- `Scripts/dedupe.py`, `Scripts/validate_parquet_vs_csv.py` for hygiene and consistency checks.
+These experts can then be combined into **fusion models** that attempt to describe the **overall system state**.
 
 ---
 
-## Machine Learning: Experts + Pattern Discovery
+## 4. Replay and Visualization
 
-`MachineLearning/` contains three major capabilities:
+Once datasets and models are prepared, the system can generate **frame-based replay timelines**.
 
-1. **Pipeline loading + feature engineering** (`ml_pipeline.py`) for multi-dataset alignment.
-2. **Pattern surfacing** (`Patternator/`) for exploratory instability/pattern signals.
-3. **Expert trainers** (`MachineLearning/Experts/`) for dataset-specific and fused models.
+These replay frames combine multiple grid signals into a synchronized snapshot that updates **once per second**.
 
-### Expert trainers
+The replay tools allow users to:
 
-`MachineLearning/Experts/` includes trainers such as:
+* explore historical events
+* visualize grid behaviour in real time
+* inspect cross-signal relationships
+* analyze disturbances and emerging patterns
 
-- `train_frequency_expert.py`
-- `train_inertia_expert.py`
-- `train_demand_expert.py`
-- `train_balancing_expert.py`
-- `train_generation_expert.py`
-- `train_gridwatch_expert.py`
-- `train_weather_expert.py`
-- fusion experts (`train_weather_generation_expert.py`, `train_weather_inertia_expert.py`)
-- system-level fusion model (`train_system_state_monster.py`)
+Replay is supported through:
 
-Artifacts are stored under:
-
-- `MachineLearning/Experts/pre-trained-experts/`
-
-The ML focus is not generic benchmark modeling; it is **domain-aware “expert” behavior modeling** for event context, anomaly surfacing, and emergent state identification.
+* web dashboards
+* a WebSocket streaming server
+* a native Android dashboard
 
 ---
 
-## Replay Tooling (Web + Android)
+# Repository Structure
 
-Replay stack lives under `Applications/`.
+The repository is organized into several major directories.
 
-### `Applications/RoCoF-App/` (web streaming)
+## Applications/
 
-- FastAPI + WebSocket replay server (`server.py`).
-- Merges multiple dataset layers into runtime snapshots.
-- Streams frame updates with 1-second cadence for detailed playback.
-- Intended for high-fidelity replay and interactive dashboard inspection.
+This directory contains **user-facing tools and dashboards**.
 
-### `Applications/RoCoF-Reply/` (web replay UI)
+Examples include:
 
-- HTML/JS replay dashboard for frame-based RoCoF payloads.
-- Consumes derived replay JSON and renders timeline/charts/cards.
+* web-based replay dashboards
+* Android replay applications
+* visualization utilities
+* system-state viewers
 
-### `Applications/RoCoFAndroid/` (native Android)
-
-- Jetpack Compose dashboard for replay JSON playback on mobile.
-- Loads replay JSON from device storage or bundled assets.
-- Provides native real-time cards/charts for field/portable analysis.
-
-### Replay payload generation
-
-- `Random/DeriveRoCoF.py` computes sample-to-sample RoCoF, aligns generation/demand context, and builds replay payload frames.
+These applications consume processed data and replay frames to present an interactive view of grid behaviour.
 
 ---
 
-## Quick Start
+## DataSources/
 
-## 1) Python environment
+This directory forms the **primary data lake** of the repository.
 
-You can use either:
+It contains:
 
-- local virtual environment (`.venv`) on Windows, or
-- Ubuntu setup script (`setup.sh`) for full stack provisioning (including optional RAPIDS path).
+* raw source data
+* processing scripts
+* normalized datasets
+* Parquet storage outputs
 
-Install Python dependencies:
+All datasets from public providers are organized here and transformed into analysis-ready formats.
 
-```bash
-pip install -r requirements.txt
+---
+
+## MachineLearning/
+
+This directory contains the **machine learning and analysis pipeline**.
+
+It includes:
+
+* feature engineering utilities
+* pattern discovery tools
+* domain-specific expert trainers
+* system-level fusion models
+
+The models produced here attempt to learn how different grid signals interact and how events emerge.
+
+---
+
+## Random/
+
+Despite the name, this directory contains **focused analytical utilities**.
+
+Most notably it contains tools for:
+
+* deriving **Rate of Change of Frequency (RoCoF)**
+* generating replay payloads
+* creating frame-based timeline data used by the visualization systems
+
+---
+
+## Scripts/
+
+This directory contains **workspace-wide utilities** used for maintenance and automation.
+
+Examples include:
+
+* data conversion orchestration
+* schema validation tools
+* dataset hygiene scripts
+* environment verification utilities
+
+---
+
+## DataSchema.json
+
+This file defines the **canonical schema for all core datasets**.
+
+It specifies:
+
+* dataset identifiers
+* expected columns
+* normalized data structure
+* partitioning rules
+* source metadata
+
+When there is uncertainty about dataset structure, this file should be treated as the **source of truth**.
+
+---
+
+## DATASOURCES.md
+
+A human-readable reference that describes the origin and purpose of each dataset included in the repository.
+
+---
+
+# Refactored Path Model
+
+The repository recently underwent a **path structure refactor**.
+
+The current canonical structure is:
+
+```
+DataSources/
+Applications/
+MachineLearning/
 ```
 
-## 2) Build parquet datasets
+However, some legacy scripts or documentation may still reference older directories such as:
 
-From repository root:
-
-```bash
-python Scripts/run_parquet_conversions.py . --run
+```
+Frequency/
+DemandData/
+DataVisualizations/
 ```
 
-## 3) Validate schema consistency
+If inconsistencies appear, the authoritative references are:
+
+* this README
+* `DataSchema.json`
+
+---
+
+# Public Data Sources
+
+The system currently integrates several major public datasets.
+
+---
+
+# NESO Data
+
+Location:
+
+```
+DataSources/NESO/
+```
+
+NESO provides the **most detailed operational datasets** used within this project.
+
+Important datasets include:
+
+### Balancing Services
+
+Contains cost and activity information related to grid balancing actions such as:
+
+* energy imbalance corrections
+* frequency control services
+* reserve activation
+* constraint management
+
+---
+
+### Demand Data
+
+Provides demand measurements and estimates including:
+
+* system demand
+* embedded generation estimates
+* interconnector flows
+
+---
+
+### Frequency
+
+High-resolution measurements of **system frequency in Hz**.
+
+These datasets are critical for:
+
+* disturbance detection
+* RoCoF analysis
+* stability event identification
+
+---
+
+### Historical Generation Data
+
+Describes the generation mix of the grid, including:
+
+* gas
+* coal
+* nuclear
+* wind
+* solar
+* imports
+
+Additional contextual fields include **carbon intensity** and system totals.
+
+---
+
+### Inertia
+
+Datasets related to the **inertia of the power system**, which affects how the grid responds to disturbances.
+
+These may include both measured values and market-based inertia services.
+
+---
+
+### Additional Operational Layers
+
+Several other datasets provide deeper operational context, including:
+
+* reserve availability
+* reactive power services
+* ancillary service dispatch instructions
+* transmission losses
+* auction results and capacity registers
+
+These layers become particularly useful when **reconstructing historical grid states**.
+
+---
+
+# National Grid Data
+
+Location:
+
+```
+DataSources/NationalGrid/
+```
+
+This directory synchronizes datasets from the **National Grid Connected Data Portal**.
+
+The structure typically includes:
+
+* raw historical pulls
+* processing scripts
+* merged Parquet outputs
+
+Datasets include:
+
+* primary grid feeds
+* GSP (Grid Supply Point) feeds
+* BSP power flow feeds
+
+---
+
+# GridWatch Data
+
+Location:
+
+```
+DataSources/GridWatch/
+```
+
+GridWatch provides **snapshot-style grid state files** that describe generation mix and system behaviour at particular intervals.
+
+Within this repository they are stored as **chunked CSV datasets** and converted into Parquet for efficient analysis.
+
+---
+
+# Weather Data
+
+Location:
+
+```
+DataSources/Weather/
+```
+
+Weather data is derived from the **Open-Meteo archive**.
+
+Variables include:
+
+* temperature
+* 100m wind speed
+* direct solar radiation
+
+Weather signals are essential when studying:
+
+* renewable generation behaviour
+* demand fluctuations
+* grid stability under environmental conditions
+
+---
+
+# Data Schema and Validation
+
+All datasets conform to definitions stored in:
+
+```
+DataSchema.json
+```
+
+The schema defines:
+
+* dataset identifiers
+* expected column sets
+* normalized naming conventions
+* Parquet partition structure
+
+Typical partitioning follows a **year-based hive structure**.
+
+Example dataset identifiers include:
+
+* BalancingServices
+* DemandData
+* Frequency
+* GridwatchData
+* HistoricalGenerationData
+* Inertia
+* Weather
+
+To verify datasets against the schema, run:
 
 ```bash
 python Scripts/validate_data_schema.py
 ```
 
-## 4) Start ML workflow
+This tool detects:
 
-- Open `MachineLearning/ml_analysis.ipynb`, or
-- run expert trainers in `MachineLearning/Experts/`.
-
-## 5) Use replay tooling
-
-- Generate replay frames with `Random/DeriveRoCoF.py`.
-- Launch web replay from `Applications/RoCoF-App/` or `Applications/RoCoF-Reply/`.
-- Open `Applications/RoCoFAndroid/` in Android Studio for native mobile replay.
+* missing columns
+* schema drift
+* incorrect dataset structure
 
 ---
 
-## Current State Notes
+# Data Processing Utilities
 
-- This repository has undergone path refactoring; canonical data paths are under `DataSources/`.
-- Some internal scripts/docs still use legacy path assumptions and are being normalized.
-- For authoritative structure and column expectations, treat `DataSchema.json` as source-of-truth.
+The repository includes several scripts that help manage data pipelines.
+
+## Parquet Conversion
+
+To convert raw datasets into Parquet format:
+
+```bash
+python Scripts/run_parquet_conversions.py . --run
+```
+
+This script automatically discovers all conversion scripts and runs them in batch.
 
 ---
 
-## Why this repository exists
+## Schema Validation
 
-This project is designed to turn public UK grid data into:
+```bash
+python Scripts/validate_data_schema.py
+```
 
-- analyzable, mergeable time-series context,
-- event-centric replay capability,
-- and ML expert systems that can detect subtle, emerging grid behaviors.
+Ensures datasets match expected schema definitions.
 
-If your goal is to study stability, operational transitions, and cross-signal causality in detail, this repo is built for exactly that.
+---
+
+## Environment Verification
+
+```bash
+python Scripts/verify_setup.py
+```
+
+Checks:
+
+* Python dependencies
+* optional GPU support
+* required packages
+
+---
+
+## Dataset Management Tools
+
+Additional utilities include:
+
+* CSV splitting for large files
+* Parquet dataset checks
+* deduplication tools
+* CSV vs Parquet validation checks
+
+These scripts help maintain dataset consistency across the workspace.
+
+---
+
+# Machine Learning Architecture
+
+The machine learning system is located in:
+
+```
+MachineLearning/
+```
+
+It consists of three major components.
+
+---
+
+## ML Pipeline
+
+`ml_pipeline.py` handles:
+
+* loading multiple datasets
+* aligning timestamps
+* building feature sets
+* preparing data for model training
+
+---
+
+## Pattern Discovery
+
+The `Patternator/` module explores datasets to surface potential:
+
+* instability signals
+* emergent patterns
+* unusual behaviour
+
+This stage is primarily exploratory and used to generate hypotheses.
+
+---
+
+## Expert Models
+
+The `Experts/` directory contains **domain-specific trainers**.
+
+Examples include:
+
+* frequency behaviour models
+* inertia behaviour models
+* demand pattern models
+* balancing activity models
+* generation mix models
+* weather interaction models
+
+There are also **fusion experts** that combine signals across domains.
+
+The most comprehensive trainer is the **system state fusion model**, which attempts to integrate multiple experts into a unified representation.
+
+Pre-trained models are stored in:
+
+```
+MachineLearning/Experts/pre-trained-experts/
+```
+
+---
+
+# Replay System
+
+One of the most powerful parts of this repository is the **grid replay system**.
+
+Replay allows historical grid behaviour to be reconstructed as **frame-based timelines**.
+
+Each frame represents a snapshot of:
+
+* frequency
+* generation
+* demand
+* weather
+* inertia
+* balancing activity
+
+These frames can then be streamed and visualized in multiple applications.
+
+---
+
+# Web Replay Server
+
+Location:
+
+```
+Applications/RoCoF-App/
+```
+
+This component runs a **FastAPI + WebSocket server**.
+
+It:
+
+* merges multiple datasets
+* builds runtime grid snapshots
+* streams frames at **1 second resolution**
+
+This allows high-fidelity playback of historical events.
+
+---
+
+# Web Replay Dashboard
+
+Location:
+
+```
+Applications/RoCoF-Reply/
+```
+
+A browser-based dashboard that:
+
+* loads replay JSON payloads
+* renders timeline views
+* displays charts and system-state cards
+
+---
+
+# Android Replay App
+
+Location:
+
+```
+Applications/RoCoFAndroid/
+```
+
+A native Android dashboard built using **Jetpack Compose**.
+
+The app can:
+
+* load replay JSON files
+* display system metrics
+* provide portable field analysis tools
+
+---
+
+# Replay Frame Generation
+
+Replay payloads are created using:
+
+```
+Random/DeriveRoCoF.py
+```
+
+This script:
+
+* calculates **Rate of Change of Frequency**
+* aligns generation and demand context
+* produces replay frames used by visualization tools
+
+---
+
+# Quick Start
+
+## 1. Install Dependencies
+
+Create a Python environment and install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 2. Convert Raw Data
+
+Run all dataset conversion scripts:
+
+```bash
+python Scripts/run_parquet_conversions.py . --run
+```
+
+---
+
+## 3. Validate Dataset Schema
+
+```bash
+python Scripts/validate_data_schema.py
+```
+
+---
+
+## 4. Start Machine Learning Analysis
+
+Open the analysis notebook:
+
+```
+MachineLearning/ml_analysis.ipynb
+```
+
+Or run expert trainers directly.
+
+---
+
+## 5. Generate Replay Data
+
+Run:
+
+```
+Random/DeriveRoCoF.py
+```
+
+Then start the replay server or dashboards.
+
+---
+
+# Current State of the Repository
+
+The repository is currently undergoing structural improvements.
+
+Recent changes include:
+
+* refactoring data paths
+* centralizing schema definitions
+* improving dataset normalization
+
+Some scripts may still reference older directory structures.
+The authoritative definitions remain:
+
+* `DataSchema.json`
+* the directory layout described in this README.
+
+---
+
+# Why This Project Exists
+
+This repository exists to transform public grid data into something much more useful:
+
+* structured time-series datasets
+* system-state reconstruction tools
+* visual replay environments
+* machine learning models capable of identifying emerging grid behaviour
+
+For researchers, engineers, or analysts interested in **grid stability, operational dynamics, or energy system behaviour**, this workspace provides the tooling needed to explore those questions in depth.
+
+---
