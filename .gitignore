@@ -1,9 +1,12 @@
 # BEGIN GDA EXCLUDES
 
-# Large data files
-# If large files are excluded here, they are in the repo alread chunked,
-# trying to keep MAX_FILE_SIZE < 1G
-# (Currently uploading all CSVs in batches)
+# CSV Export Restrictions
+# I was late reading TOS seems i cant share the CSV files, or i can but i cant
+# to much extra hassle i dont want. Solution, prevent CSV uploads, provide downloaders
+# And before you ask why im not using there API's UKPowerNetworks is infuriating, and CSV
+# are simply faster
+
+*.csv
 
 # GDA Specific Excludes.
 # What we exclude and why
