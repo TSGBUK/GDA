@@ -1,11 +1,11 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 from pathlib import Path
 import concurrent.futures
 from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_partitioned_parquet
 
 # --- paths ---
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 CSV_DIR = ROOT / "DataSources" / "Weather"
 PARQUET_DIR = CSV_DIR / "Parquet"
 

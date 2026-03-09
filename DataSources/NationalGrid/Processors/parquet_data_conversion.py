@@ -1,4 +1,4 @@
-import os
+﻿import os
 import re
 import sys
 from pathlib import Path
@@ -6,7 +6,7 @@ from pathlib import Path
 import pandas as pd
 
 
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 DATASET_DIR = ROOT / "DataSources" / "NationalGrid"
 CSV_ROOT = DATASET_DIR / "history"
 PARQUET_ROOT = DATASET_DIR / "Parquet"
@@ -215,6 +215,7 @@ def convert_csv_to_parquet() -> None:
             csv_file_name=output_csv_name,
             parquet_engine=os.getenv("PARQUET_ENGINE", "pyarrow"),
             timestamp_column="timestamp_utc",
+            database_name=group_name,
         )
 
     log("[info] DataSources/NationalGrid parquet conversion complete")
@@ -222,3 +223,4 @@ def convert_csv_to_parquet() -> None:
 
 if __name__ == "__main__":
     convert_csv_to_parquet()
+

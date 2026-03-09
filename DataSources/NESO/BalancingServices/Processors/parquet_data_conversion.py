@@ -1,11 +1,11 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 from pathlib import Path
 import concurrent.futures
 from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_partitioned_parquet
 
 # --- paths ---
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 CSV_DIR = ROOT / "DataSources" / "NESO" / "BalancingServices"
 PARQUET_DIR = CSV_DIR / "Parquet"
 
@@ -16,7 +16,7 @@ PARQUET_DIR.mkdir(parents=True, exist_ok=True)
 def settlement_to_datetime(date_series: pd.Series, period_series: pd.Series) -> pd.Series:
     """
     Convert Settlement Date + Settlement Period to UTC datetime.
-    UK settlement periods are half-hourly, 1 = 00:00–00:30, 2 = 00:30–01:00, ..., 48 = 23:30–00:00.
+    UK settlement periods are half-hourly, 1 = 00:00â€“00:30, 2 = 00:30â€“01:00, ..., 48 = 23:30â€“00:00.
 
     The CSVs use mixed date formats: older files use "DD/MM/YYYY" while some later files
     are ISO "YYYY-MM-DD".  We try the UK style first and fall back to pandas' parser.
@@ -55,7 +55,7 @@ def convert_csv_to_parquet():
             print(f"[skip] {file_name} already converted")
             return
 
-        print(f"[conv] {file_name} → {PARQUET_DIR}")
+        print(f"[conv] {file_name} â†’ {PARQUET_DIR}")
         try:
             df = pd.read_csv(
                 fpath,

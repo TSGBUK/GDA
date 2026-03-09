@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Utility to scan for parquet files and optionally remove empty directories.
+"""Utility to scan parquet directories and optionally perform a full reset.
 
-Walking the tree from a given root, the script will list every directory that
-contains no ``*.parquet`` files.  By default the results are written to
-stdout; you can send them to a file with ``--report`` or delete the empty
-directories with ``--cleanup``.
+Walking the tree from a given root, the script will list every directory named
+``Parquet`` (case-insensitive). By default the results are written to stdout;
+you can send them to a file with ``--report`` or fully remove parquet outputs
+with ``--cleanup``.
 
-The intent is to help identify and clean up folders where parquet data has
-been removed or otherwise lost.
+The intent is to help identify and reset parquet outputs during environment
+rebuilds.
 """
 
 import os
@@ -55,9 +55,49 @@ def scan(root):
     return matches
 
 
+def cleanup_parquet_data(root, parquet_dirs):
+    """Delete parquet folder trees and any loose *.parquet files under root."""
+    import shutil
+
+    removed_dirs = 0
+    removed_files = 0
+    failed = 0
+
+    for d in parquet_dirs:
+        try:
+            shutil.rmtree(d)
+            removed_dirs += 1
+            print(f"removed parquet directory tree: {d}")
+        except Exception as exc:  # pragma: no cover - best-effort cleanup
+            failed += 1
+            print(f"failed to remove {d}: {exc}")
+
+    for dirpath, dirnames, filenames in os.walk(root):
+        dirnames[:] = [d for d in dirnames if d not in SKIP_DIR_NAMES]
+        if should_skip_path(dirpath):
+            continue
+
+        for name in filenames:
+            if not name.lower().endswith(".parquet"):
+                continue
+            file_path = os.path.join(dirpath, name)
+            try:
+                os.remove(file_path)
+                removed_files += 1
+                print(f"removed parquet file: {file_path}")
+            except Exception as exc:  # pragma: no cover - best-effort cleanup
+                failed += 1
+                print(f"failed to remove file {file_path}: {exc}")
+
+    print(
+        f"cleanup summary: removed_dirs={removed_dirs}, "
+        f"removed_files={removed_files}, failed={failed}"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(
-        description="Scan for and optionally remove folders named 'Parquet'."
+        description="Scan parquet folders and optionally fully reset parquet outputs."
     )
     parser.add_argument(
         "root",
@@ -68,7 +108,7 @@ def main():
     parser.add_argument(
         "--cleanup",
         action="store_true",
-        help="Remove directories that contain no parquet files.",
+        help="Full reset: remove all Parquet/parquet directories and *.parquet files under root.",
     )
     parser.add_argument(
         "--report",
@@ -87,14 +127,7 @@ def main():
             print(d)
 
     if args.cleanup:
-        import shutil
-
-        for d in matches:
-            try:
-                shutil.rmtree(d)
-                print(f"removed parquet directory tree: {d}")
-            except Exception as exc:  # pragma: no cover - best-effort cleanup
-                print(f"failed to remove {d}: {exc}")
+        cleanup_parquet_data(args.root, matches)
 
 
 if __name__ == "__main__":

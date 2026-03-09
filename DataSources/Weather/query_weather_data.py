@@ -11,10 +11,14 @@ PARQUET_DIR = ROOT / "DataSources" / "Weather" / "Parquet"
 
 # --- Data Loader ------------------------------------------------------------
 def list_years():
-    years = []
-    for name in os.listdir(PARQUET_DIR):
-        if name.startswith("year="):
-            years.append(int(name.split("=")[1]))
+    years = set()
+    if not PARQUET_DIR.exists():
+        return []
+    for year_dir in PARQUET_DIR.glob("**/year=*"):
+        try:
+            years.add(int(year_dir.name.split("=", 1)[1]))
+        except ValueError:
+            continue
     return sorted(years)
 
 

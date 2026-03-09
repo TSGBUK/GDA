@@ -12,15 +12,14 @@ PARQUET_DIR = ROOT / "DataSources" / "GridWatch" / "Parquet"
 # --- Data Loader ------------------------------------------------------------
 def list_years():
     """List the years available in the parquet dataset."""
-    years = []
+    years = set()
     if not os.path.isdir(PARQUET_DIR):
-        return years
-    for name in os.listdir(PARQUET_DIR):
-        if name.startswith("year="):
-            try:
-                years.append(int(name.split("=")[1]))
-            except ValueError:
-                pass
+        return []
+    for year_dir in Path(PARQUET_DIR).glob("**/year=*"):
+        try:
+            years.add(int(year_dir.name.split("=", 1)[1]))
+        except ValueError:
+            continue
     return sorted(years)
 
 

@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 from pathlib import Path
 import re
@@ -7,7 +7,7 @@ from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_par
 
 
 # --- paths ------------------------------------------------------------------
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 CSV_DIR = ROOT / "DataSources" / "GridWatch"
 PARQUET_DIR = CSV_DIR / "Parquet"
 
@@ -84,3 +84,4 @@ def convert_csv_to_parquet():
 
 if __name__ == "__main__":
     convert_csv_to_parquet()
+

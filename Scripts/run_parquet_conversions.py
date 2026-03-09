@@ -33,10 +33,19 @@ def find_conversion_scripts(root, include_non_processors=False):
 
 
 def default_root():
-    try:
-        return str(next(p for p in Path(__file__).resolve().parents if p.name == "GDA"))
-    except StopIteration:
-        return str(Path.cwd())
+    script_path = Path(__file__).resolve()
+
+    # Prefer an ancestor that looks like the repository root.
+    for parent in script_path.parents:
+        if (parent / "DataSources").is_dir() and (parent / "Scripts").is_dir():
+            return str(parent)
+
+    # Back-compat fallback for older layouts that relied on the folder name.
+    for parent in script_path.parents:
+        if parent.name.lower() == "gda":
+            return str(parent)
+
+    return str(Path.cwd())
 
 
 def _has_module(python_exe, module_name):
@@ -122,9 +131,12 @@ def normalize_log_line(dataset, line):
 def run_script_pretty(script, python_executable, parquet_engine=None):
     """Run one converter and print normalized output lines."""
     dataset = dataset_name_from_script(script)
+    repo_root = str(Path(__file__).resolve().parents[1])
     print(f"\n=== {dataset} ===")
     child_env = os.environ.copy()
     child_env["PYTHONIOENCODING"] = "utf-8"
+    existing_pythonpath = child_env.get("PYTHONPATH", "")
+    child_env["PYTHONPATH"] = repo_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
     if parquet_engine:
         child_env["PARQUET_ENGINE"] = parquet_engine
     ret = subprocess.run(
@@ -132,6 +144,7 @@ def run_script_pretty(script, python_executable, parquet_engine=None):
         capture_output=True,
         text=True,
         env=child_env,
+        cwd=repo_root,
     )
 
     stdout_lines = ret.stdout.splitlines() if ret.stdout else []
@@ -242,11 +255,14 @@ def main():
         for script in matches:
             if args.raw:
                 print(f"running {script}")
+                repo_root = str(Path(__file__).resolve().parents[1])
                 child_env = os.environ.copy()
                 child_env["PYTHONIOENCODING"] = "utf-8"
+                existing_pythonpath = child_env.get("PYTHONPATH", "")
+                child_env["PYTHONPATH"] = repo_root + (os.pathsep + existing_pythonpath if existing_pythonpath else "")
                 if parquet_engine:
                     child_env["PARQUET_ENGINE"] = parquet_engine
-                ret = subprocess.run([run_python, script], env=child_env)
+                ret = subprocess.run([run_python, script], env=child_env, cwd=repo_root)
                 if ret.returncode != 0:
                     failures += 1
                     print(f"script {script} exited with {ret.returncode}")

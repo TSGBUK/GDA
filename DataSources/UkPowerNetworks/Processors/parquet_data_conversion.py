@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Master UKPN parquet conversion runner.
 
 Walks history CSV exports, maps each dataset slug to a dedicated parser script,
@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 UKPN_ROOT = ROOT / "DataSources" / "UkPowerNetworks"
 HISTORY_ROOT = UKPN_ROOT / "history"
 PROCESSORS_DIR = UKPN_ROOT / "Processors"
@@ -103,3 +103,4 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+

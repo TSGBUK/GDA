@@ -11,6 +11,7 @@ import csv
 from pathlib import Path
 
 import pandas as pd
+from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_partitioned_parquet
 
 
 ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
@@ -32,20 +33,15 @@ def read_csv_safely(path: Path) -> pd.DataFrame:
     raise RuntimeError(f"Unable to read CSV {path}: {last_error}")
 
 
-def has_fresh_parquet_output(csv_path: Path, parquet_path: Path) -> bool:
-    if not parquet_path.exists():
-        return False
-    return parquet_path.stat().st_mtime >= csv_path.stat().st_mtime
-
-
 def discover_csvs_for_slug(dataset_slug: str) -> list[Path]:
     pattern = f"**/{dataset_slug}__export.csv"
     return sorted(path for path in HISTORY_ROOT.glob(pattern) if path.is_file())
 
 
-def build_output_path(csv_path: Path) -> Path:
-    rel = csv_path.relative_to(HISTORY_ROOT)
-    return PARQUET_ROOT / rel.with_suffix(".parquet")
+def build_output_csv_name(csv_path: Path) -> str:
+    rel = csv_path.relative_to(HISTORY_ROOT).with_suffix("")
+    parts = [p.replace(" ", "_") for p in rel.parts]
+    return "__".join(parts) + ".csv"
 
 
 def validate_header_roundtrip(csv_path: Path, df: pd.DataFrame) -> None:
@@ -99,11 +95,15 @@ def prune_csv_keep_last_rows(csv_path: Path, keep_rows: int = CSV_ROWS_TO_KEEP) 
     return (rows_removed, len(kept))
 
 
-def convert_one_csv(csv_path: Path, force: bool = False) -> tuple[str, int, int]:
-    out_path = build_output_path(csv_path)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
+def convert_one_csv(dataset_slug: str, csv_path: Path, force: bool = False) -> tuple[str, int, int]:
+    output_csv_name = build_output_csv_name(csv_path)
 
-    if not force and has_fresh_parquet_output(csv_path, out_path):
+    if not force and has_fresh_partitioned_output(
+        parquet_dir=PARQUET_ROOT,
+        csv_file_name=output_csv_name,
+        csv_mtime=csv_path.stat().st_mtime,
+        database_name=dataset_slug,
+    ):
         return ("skip", 0, 0)
 
     df = read_csv_safely(csv_path)
@@ -112,8 +112,14 @@ def convert_one_csv(csv_path: Path, force: bool = False) -> tuple[str, int, int]
     rows = len(df)
     cols = len(df.columns)
 
-    # Like-for-like conversion: no column drops, no row filtering.
-    df.to_parquet(out_path, engine="pyarrow", compression="snappy", index=False)
+    # Keep rows/columns as-is and use shared partitioning rules (year/week hive).
+    write_partitioned_parquet(
+        df=df,
+        parquet_dir=PARQUET_ROOT,
+        csv_file_name=output_csv_name,
+        parquet_engine="pyarrow",
+        database_name=dataset_slug,
+    )
 
     removed, remaining = prune_csv_keep_last_rows(csv_path, keep_rows=CSV_ROWS_TO_KEEP)
     if removed > 0:
@@ -138,7 +144,7 @@ def convert_dataset_slug(dataset_slug: str, force: bool = False) -> int:
     for csv_path in csv_files:
         rel = csv_path.relative_to(HISTORY_ROOT)
         try:
-            status, rows, cols = convert_one_csv(csv_path, force=force)
+            status, rows, cols = convert_one_csv(dataset_slug, csv_path, force=force)
             if status == "skip":
                 skip += 1
                 print(f"[skip] {dataset_slug}: {rel}")

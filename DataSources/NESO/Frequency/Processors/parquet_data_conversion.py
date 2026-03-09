@@ -1,4 +1,4 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 from pathlib import Path
 import re
@@ -7,7 +7,7 @@ from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_par
 
 
 # --- paths ---
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 CSV_DIR = ROOT / "DataSources" / "NESO" / "Frequency"
 PARQUET_DIR = CSV_DIR / "Parquet"
 
@@ -76,7 +76,7 @@ def convert_csv_to_parquet():
             log(f"[skip] {file_name} already converted")
             return
 
-        log(f"[conv] {file_name} → {PARQUET_DIR}")
+        log(f"[conv] {file_name} â†’ {PARQUET_DIR}")
 
         try:
             log(f"[work] reading {file_name}")
@@ -122,3 +122,4 @@ def convert_csv_to_parquet():
 
 if __name__ == "__main__":
     convert_csv_to_parquet()
+

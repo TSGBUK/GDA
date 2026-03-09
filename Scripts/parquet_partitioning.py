@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Iterable
+import re
 
 import pandas as pd
-
-MONTH_THRESHOLD = 1_000_000
-WEEK_THRESHOLD = 10_000_000
 
 _DATE_NAME_HINTS = (
     "datetime",
@@ -20,13 +18,19 @@ _DATE_NAME_HINTS = (
 )
 
 
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
+
+
+def _normalize_database_name(name: str) -> str:
+    text = name.strip().lower()
+    text = _NON_ALNUM_RE.sub("_", text)
+    text = text.strip("_")
+    return text or "unknown"
+
+
 def determine_partition_columns(row_count: int) -> list[str]:
-    columns = ["year"]
-    if row_count > MONTH_THRESHOLD:
-        columns.append("month")
-    if row_count > WEEK_THRESHOLD:
-        columns.append("week")
-    return columns
+    _ = row_count
+    return ["year", "week"]
 
 
 def _find_timestamp_column(df: pd.DataFrame) -> str | None:
@@ -66,9 +70,13 @@ def _build_partition_frame(
     partition_columns: Iterable[str],
     fallback_year: str | int | None = None,
     timestamp_column: str | None = None,
+    database_name: str | None = None,
 ) -> tuple[pd.DataFrame, list[str]]:
     out = df.copy()
     required = list(partition_columns)
+
+    db_name = _normalize_database_name(database_name or "unknown")
+    out["database"] = db_name
 
     timestamp_col = timestamp_column or _find_timestamp_column(out)
     parsed_ts = None
@@ -87,6 +95,8 @@ def _build_partition_frame(
         if fallback_year is None:
             fallback_year = "unknown"
         out["year"] = str(fallback_year)
+        if "week" in required:
+            out["week"] = "00"
 
     if "year" in out.columns:
         out["year"] = out["year"].astype("string").fillna("unknown")
@@ -113,9 +123,15 @@ def _build_partition_frame(
     return out, effective
 
 
-def has_fresh_partitioned_output(parquet_dir: Path, csv_file_name: str, csv_mtime: float) -> bool:
+def has_fresh_partitioned_output(
+    parquet_dir: Path,
+    csv_file_name: str,
+    csv_mtime: float,
+    database_name: str | None = None,
+) -> bool:
     parquet_name = csv_file_name.replace(".csv", ".parquet")
-    matches = list(parquet_dir.glob(f"**/{parquet_name}"))
+    db_name = _normalize_database_name(database_name or parquet_dir.parent.name)
+    matches = list((parquet_dir / db_name).glob(f"**/{parquet_name}"))
     if not matches:
         return False
     return all(path.stat().st_mtime >= csv_mtime for path in matches)
@@ -128,27 +144,30 @@ def write_partitioned_parquet(
     parquet_engine: str,
     fallback_year: str | int | None = None,
     timestamp_column: str | None = None,
+    database_name: str | None = None,
 ) -> list[Path]:
     row_count = len(df)
     partition_cols = determine_partition_columns(row_count)
+    db_name = _normalize_database_name(database_name or parquet_dir.parent.name)
 
     partitioned, effective_cols = _build_partition_frame(
         df,
         partition_columns=partition_cols,
         fallback_year=fallback_year,
         timestamp_column=timestamp_column,
+        database_name=db_name,
     )
 
-    if "month" in partition_cols and "month" not in effective_cols:
-        print(f"[warn] {csv_file_name}: month partition requested but no timestamp; using year-only")
     if "week" in partition_cols and "week" not in effective_cols:
         print(f"[warn] {csv_file_name}: week partition requested but no timestamp; using available partitions")
 
     written: list[Path] = []
     for keys, sub in partitioned.groupby(effective_cols, dropna=False):
         key_values = (keys,) if not isinstance(keys, tuple) else keys
-        outdir = parquet_dir
+        outdir = parquet_dir / db_name
         for col, value in zip(effective_cols, key_values):
+            if col == "database":
+                continue
             outdir = outdir / f"{col}={value}"
         outdir.mkdir(parents=True, exist_ok=True)
 

@@ -1,55 +1,48 @@
-import pandas as pd
+﻿import pandas as pd
 import os
 import re
+import json
 import concurrent.futures
 from pathlib import Path
 from Scripts.parquet_partitioning import has_fresh_partitioned_output, write_partitioned_parquet
 
 # --- paths ---
-ROOT = next(p for p in Path(__file__).resolve().parents if p.name == "GDA")
+ROOT = next(p for p in Path(__file__).resolve().parents if p.name.lower() == "gda")
 CSV_DIR = ROOT / "DataSources" / "NESO" / "DemandData"
 PARQUET_DIR = CSV_DIR / "Parquet"
 
-# --- schema metadata --------------------------------------------------------
-# mapping of column names to their descriptions and expected types based
-# on the official data dictionary. This is used both
-# for documentation and to enforce appropriate pandas dtypes during
-# conversion to parquet.
-SCHEMA = {
-    # core fields with units taken from the user-provided schema
-    "SETTLEMENT_DATE": {
-        "title": "Settlement Date",
-        "type": "date",
-        "description": "The date the historic outturn occurred. Follows clock change, ISO 8601.",
-        "unit": "ISO 8601"
-    },
-    "SETTLEMENT_PERIOD": {
-        "title": "Settlement Period",
-        "type": "integer",
-        "description": "The half hourly period for the historic outturn occurred.",
-        "unit": ""
-    },
-    "ND": {"title": "National Demand", "type": "integer", "unit": "MW"},
-    "TSD": {"title": "Transmission System Demand", "type": "integer", "unit": "MW"},
-    "ENGLAND_WALES_DEMAND": {"title": "England and Wales Demand", "type": "integer", "unit": "MW"},
-    "EMBEDDED_WIND_GENERATION": {"title": "Estimated Embedded Wind Generation", "type": "integer", "unit": "MW"},
-    "EMBEDDED_WIND_CAPACITY": {"title": "Embedded Wind Capacity", "type": "integer", "unit": "MW"},
-    "EMBEDDED_SOLAR_GENERATION": {"title": "Estimated Embedded Solar Generation", "type": "integer", "unit": "MW"},
-    "EMBEDDED_SOLAR_CAPACITY": {"title": "Embedded Solar Capacity", "type": "integer", "unit": "MW"},
-    "NON_BM_STOR": {"title": "Non-Balancing Mechanism Short-Term Operating Reserve", "type": "integer", "unit": "MW"},
-    "PUMP_STORAGE_PUMPING": {"title": "Pump Storage Pumping", "type": "integer", "unit": "MW"},
-    "SCOTTISH_TRANSFER": {"title": "Scottish Transfer Volume", "type": "integer", "unit": "MW"},
-    "IFA_FLOW": {"title": "IFA Interconnector Flow", "type": "integer", "unit": "MW"},
-    "IFA2_FLOW": {"title": "IFA2 Interconnector Flow", "type": "integer", "unit": "MW"},
-    "BRITNED_FLOW": {"title": "BritNed Interconnector Flow", "type": "integer", "unit": "MW"},
-    "MOYLE_FLOW": {"title": "Moyle Interconnector Flow", "type": "integer", "unit": "MW"},
-    "EAST_WEST_FLOW": {"title": "East West Interconnector Flow", "type": "integer", "unit": "MW"},
-    "NEMO_FLOW": {"title": "Nemo Interconnector Flow", "type": "integer", "unit": "MW"},
-    "NSL_FLOW": {"title": "North Sea Link Interconnector Flow", "type": "integer", "unit": "MW"},
-    "ELECLINK_FLOW": {"title": "ElecLink Interconnector Flow", "type": "integer", "unit": "MW"},
-    "VIKING_FLOW": {"title": "Viking Interconnector Flow", "type": "integer", "unit": "MW"},
-    "GREENLINK_FLOW": {"title": "Greenlink Interconnector Flow", "type": "integer", "unit": "MW"},
-}
+SCHEMA_PATH = ROOT / "DataSchema.json"
+
+
+def load_dataset_schema(dataset_id: str) -> dict[str, dict[str, str]]:
+    try:
+        with SCHEMA_PATH.open("r", encoding="utf-8") as handle:
+            payload = json.load(handle)
+    except Exception as exc:
+        print(f"[warn] Could not read {SCHEMA_PATH}: {exc}")
+        return {}
+
+    datasets = payload.get("datasets", []) if isinstance(payload, dict) else []
+    for dataset in datasets:
+        if dataset.get("id") != dataset_id:
+            continue
+        raw = dataset.get("schema", {}).get("rawCsv", {})
+        columns = raw.get("columns", []) if isinstance(raw, dict) else []
+        schema: dict[str, dict[str, str]] = {}
+        for column in columns:
+            name = column.get("name")
+            if isinstance(name, str) and name:
+                schema[name] = {
+                    "type": str(column.get("type", "number")).lower(),
+                    "unit": str(column.get("unit", "")),
+                }
+        return schema
+
+    print(f"[warn] Dataset schema '{dataset_id}' not found in {SCHEMA_PATH.name}")
+    return {}
+
+
+SCHEMA = load_dataset_schema("DemandData")
 
 
 # Ensure output exists
