@@ -176,6 +176,43 @@ python Scripts/normalize_data_schema.py --schema path/to/DataSchema.json
 - Before committing schema changes to ensure consistency
 - As part of CI/CD validation pipelines
 
+## `extract_csv_headers_mapping.py`
+
+Scans a CSV data tree (default: `D:\\Data\\NGRAWData`) and builds a persistent
+JSON mapping file for long-term parquet column normalization.
+
+What it does:
+
+- Walks all CSV files under the target root and extracts header row names
+- Stores per-file metadata and deterministic `header_hash` values
+- Adds per-column mapping scaffolding:
+  - `source_header`
+  - `normalized_header`
+  - `parquet_name`
+  - `dtype_hint`
+  - `notes`
+- Preserves existing mapping values for unchanged source headers
+- Prints explicit schema-change alerts if a previously known file's headers change
+- Avoids rewriting output when no structural changes are detected
+
+### Usage
+
+```sh
+# scan default NG raw data folder and write default output JSON
+python Scripts/extract_csv_headers_mapping.py
+
+# custom scan root and output
+python Scripts/extract_csv_headers_mapping.py \
+  --root D:/Data/NGRAWData \
+  --output DataSources/NationalGrid/Processors/csv_header_mappings.json
+
+# preview only (no file writes)
+python Scripts/extract_csv_headers_mapping.py --dry-run
+
+# populate normalized_header/parquet_name/dtype_hint for blank mappings
+python Scripts/extract_csv_headers_mapping.py --auto-fill-mappings
+```
+
 ## `verify_setup.py`
 
 A comprehensive environment verification tool that checks all dependencies
