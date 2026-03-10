@@ -1,735 +1,492 @@
-
 # Grid Data Analysis (GDA)
 
-## A Workspace for Understanding the UK Electricity Grid
+Comprehensive UK electricity grid data engineering, analytics, machine learning, and replay workspace.
 
-**GDA (Grid Data Analysis)** is an experimental research and analysis environment built around **publicly available UK electricity system data**.
+This repository brings together public UK grid datasets, converts them into analysis-ready forms, trains domain-specific ML experts, and supports replay dashboards (web and Android) for event inspection.
 
-The goal of this project is simple in concept but ambitious in execution:
+For day-to-day operations and command-first procedures, see RUNBOOK.md.
 
-> Given a wide collection of independent grid signals, estimate and reconstruct the **most likely operational state of the UK grid at any moment in time**.
+## What This Project Is
 
-To achieve this, GDA aggregates multiple public data sources and builds a pipeline that allows those signals to be:
+GDA is a full-stack research workspace for understanding system behavior in the UK electricity network by combining many independent data streams into a time-aligned operational view.
 
-* ingested
-* cleaned and normalized
-* merged into aligned time-series datasets
-* analyzed with machine learning models
-* replayed visually to explore system behaviour over time
+Primary goals:
+- Ingest and normalize heterogeneous public datasets.
+- Convert large CSV datasets into partitioned parquet for fast query and training.
+- Build domain experts for frequency, demand, generation, inertia, balancing, weather, and fused system state.
+- Replay historical operating periods with synchronized telemetry panels and event indicators.
 
-The repository acts as a **complete workspace for grid-state analysis**, combining data engineering, machine learning, and visualization tooling.
+## What You Can Do With It
 
----
+- Build a local data lake from NESO, National Grid, GridWatch, weather, and related sources.
+- Validate schema drift against a declared contract in DataSchema.json.
+- Run utility pipelines for dedupe, CSV chunking, conversion orchestration, and setup verification.
+- Train multiple expert models and fused models (including a large system-state trainer).
+- Serve live replay snapshots over WebSocket from parquet-backed data.
+- Open web dashboards or Android UI for visual analysis.
 
-# What This Project Tries To Do
+## Current Repository Layout (Canonical)
 
-The UK electricity grid is an incredibly complex system. Many different signals exist that describe its behaviour:
-
-* system frequency
-* electricity demand
-* generation mix
-* grid inertia
-* balancing actions
-* weather conditions
-* interconnector flows
-* reserve services
-* transmission losses
-
-Individually these signals provide **partial insight** into grid behaviour.
-But when they are **combined and aligned**, they begin to reveal deeper patterns.
-
-GDA attempts to answer questions like:
-
-* What events precede **frequency disturbances**?
-* How does **generation mix affect system inertia**?
-* Do weather patterns correlate with **balancing activity**?
-* What signals appear **before system stress or instability**?
-
-In essence, the system behaves like a **very crude state estimator**:
-
-> Given a collection of inputs, what was the *likely operational state of the grid* at time **T**?
-
-This repository provides the tooling required to:
-
-* process the raw data
-* discover patterns
-* train domain-specific machine learning models
-* replay events and inspect system behaviour visually
-
----
-
-# High-Level Architecture
-
-The repository is organized around **four primary operational layers**.
-
-## 1. Data Ingestion
-
-Raw datasets are collected from multiple public providers, including:
-
-* NESO
-* National Grid
-* GridWatch
-* Open-Meteo weather archive
-
-Each provider publishes data in different formats and time resolutions.
-The ingestion layer standardizes these sources and prepares them for analysis.
-
----
-
-## 2. Data Normalization and Storage
-
-After ingestion, datasets are:
-
-* cleaned
-* validated
-* normalized into consistent schemas
-* converted to **Parquet** or structured CSV formats
-
-The normalized datasets become the **data lake** used by downstream machine learning and replay systems.
-
-This stage ensures that:
-
-* timestamps align
-* column formats are consistent
-* partitions are organized for fast querying
-
----
-
-## 3. Machine Learning Experts
-
-Rather than building one large model, the project trains **domain-specific expert models**.
-
-Each expert focuses on a particular signal family:
-
-* frequency behaviour
-* inertia patterns
-* demand shifts
-* generation mix changes
-* balancing activity
-* weather interactions
-
-These experts can then be combined into **fusion models** that attempt to describe the **overall system state**.
-
----
-
-## 4. Replay and Visualization
-
-Once datasets and models are prepared, the system can generate **frame-based replay timelines**.
-
-These replay frames combine multiple grid signals into a synchronized snapshot that updates **once per second**.
-
-The replay tools allow users to:
-
-* explore historical events
-* visualize grid behaviour in real time
-* inspect cross-signal relationships
-* analyze disturbances and emerging patterns
-
-Replay is supported through:
-
-* web dashboards
-* a WebSocket streaming server
-* a native Android dashboard
-
----
-
-# Repository Structure
-
-The repository is organized into several major directories.
-
-## Applications/
-
-This directory contains **user-facing tools and dashboards**.
-
-Examples include:
-
-* web-based replay dashboards
-* Android replay applications
-* visualization utilities
-* system-state viewers
-
-These applications consume processed data and replay frames to present an interactive view of grid behaviour.
-
----
-
-## DataSources/
-
-This directory forms the **primary data lake** of the repository.
-
-It contains:
-
-* raw source data
-* processing scripts
-* normalized datasets
-* Parquet storage outputs
-
-All datasets from public providers are organized here and transformed into analysis-ready formats.
-
----
-
-## MachineLearning/
-
-This directory contains the **machine learning and analysis pipeline**.
-
-It includes:
-
-* feature engineering utilities
-* pattern discovery tools
-* domain-specific expert trainers
-* system-level fusion models
-
-The models produced here attempt to learn how different grid signals interact and how events emerge.
-
----
-
-## Random/
-
-Despite the name, this directory contains **focused analytical utilities**.
-
-Most notably it contains tools for:
-
-* deriving **Rate of Change of Frequency (RoCoF)**
-* generating replay payloads
-* creating frame-based timeline data used by the visualization systems
-
----
-
-## Scripts/
-
-This directory contains **workspace-wide utilities** used for maintenance and automation.
-
-Examples include:
-
-* data conversion orchestration
-* schema validation tools
-* dataset hygiene scripts
-* environment verification utilities
-
----
-
-## DataSchema.json
-
-This file defines the **canonical schema for all core datasets**.
-
-It specifies:
-
-* dataset identifiers
-* expected columns
-* normalized data structure
-* partitioning rules
-* source metadata
-
-When there is uncertainty about dataset structure, this file should be treated as the **source of truth**.
-
----
-
-## DATASOURCES.md
-
-A human-readable reference that describes the origin and purpose of each dataset included in the repository.
-
----
-
-# Refactored Path Model
-
-The repository recently underwent a **path structure refactor**.
-
-The current canonical structure is:
-
-```
-DataSources/
-Applications/
-MachineLearning/
-```
-
-However, some legacy scripts or documentation may still reference older directories such as:
-
-```
-Frequency/
-DemandData/
-DataVisualizations/
-```
-
-If inconsistencies appear, the authoritative references are:
-
-* this README
-* `DataSchema.json`
-
----
-
-# Public Data Sources
-
-The system currently integrates several major public datasets.
-
----
-
-# NESO Data
-
-Location:
-
-```
-DataSources/NESO/
-```
-
-NESO provides the **most detailed operational datasets** used within this project.
-
-Important datasets include:
-
-### Balancing Services
-
-Contains cost and activity information related to grid balancing actions such as:
-
-* energy imbalance corrections
-* frequency control services
-* reserve activation
-* constraint management
-
----
-
-### Demand Data
-
-Provides demand measurements and estimates including:
-
-* system demand
-* embedded generation estimates
-* interconnector flows
-
----
-
-### Frequency
-
-High-resolution measurements of **system frequency in Hz**.
-
-These datasets are critical for:
-
-* disturbance detection
-* RoCoF analysis
-* stability event identification
-
----
-
-### Historical Generation Data
-
-Describes the generation mix of the grid, including:
-
-* gas
-* coal
-* nuclear
-* wind
-* solar
-* imports
-
-Additional contextual fields include **carbon intensity** and system totals.
-
----
-
-### Inertia
-
-Datasets related to the **inertia of the power system**, which affects how the grid responds to disturbances.
-
-These may include both measured values and market-based inertia services.
-
----
-
-### Additional Operational Layers
-
-Several other datasets provide deeper operational context, including:
-
-* reserve availability
-* reactive power services
-* ancillary service dispatch instructions
-* transmission losses
-* auction results and capacity registers
-
-These layers become particularly useful when **reconstructing historical grid states**.
-
----
-
-# National Grid Data
-
-Location:
-
-```
-DataSources/NationalGrid/
-```
-
-This directory synchronizes datasets from the **National Grid Connected Data Portal**.
-
-The structure typically includes:
-
-* raw historical pulls
-* processing scripts
-* merged Parquet outputs
-
-Datasets include:
-
-* primary grid feeds
-* GSP (Grid Supply Point) feeds
-* BSP power flow feeds
-
----
-
-# GridWatch Data
-
-Location:
-
-```
-DataSources/GridWatch/
-```
-
-GridWatch provides **snapshot-style grid state files** that describe generation mix and system behaviour at particular intervals.
-
-Within this repository they are stored as **chunked CSV datasets** and converted into Parquet for efficient analysis.
-
----
-
-# Weather Data
-
-Location:
-
-```
-DataSources/Weather/
-```
-
-Weather data is derived from the **Open-Meteo archive**.
-
-Variables include:
-
-* temperature
-* 100m wind speed
-* direct solar radiation
-
-Weather signals are essential when studying:
-
-* renewable generation behaviour
-* demand fluctuations
-* grid stability under environmental conditions
-
----
-
-# Data Schema and Validation
-
-All datasets conform to definitions stored in:
-
-```
-DataSchema.json
-```
-
-The schema defines:
-
-* dataset identifiers
-* expected column sets
-* normalized naming conventions
-* Parquet partition structure
-
-Typical partitioning follows a **year-based hive structure**.
-
-Example dataset identifiers include:
-
-* BalancingServices
-* DemandData
-* Frequency
-* GridwatchData
-* HistoricalGenerationData
-* Inertia
-* Weather
-
-To verify datasets against the schema, run:
+- Data root: DataSources/
+- Application root: Applications/
+- ML root: MachineLearning/
+- Utilities root: Scripts/
+- Focused analysis scripts: Random/
+
+Legacy docs may still mention older roots such as Frequency/, DemandData/, or DataVisualizations/. Use the structure above plus DataSchema.json as source-of-truth.
+
+## High-Level Architecture
+
+1. Source ingestion and storage
+- Raw CSV and source snapshots are kept under DataSources/ by provider and dataset.
+
+2. Dataset normalization and parquet conversion
+- Dataset-specific parquet_data_conversion.py scripts convert source files into parquet, usually hive partitioned by year.
+
+3. Data validation and quality checks
+- Schema and freshness checks are performed with Scripts/validate_data_schema.py and Scripts/validate_parquet_vs_csv.py.
+
+4. Feature loading and model training
+- MachineLearning/ml_pipeline.py provides multi-source loaders and merge helpers.
+- MachineLearning/Experts/ contains expert trainers and fusion trainers.
+
+5. Replay and visualization
+- Applications/RoCoF-App/server.py streams synchronized snapshots via FastAPI + WebSocket.
+- Applications/RoCoF-Reply is a browser replay dashboard.
+- Applications/RoCoFAndroid is a native Android replay client.
+
+## Top-Level Directory Guide
+
+### Applications/
+
+- MasterProjectSite/
+  - Static site pages and assets.
+- RoCoF-App/
+  - FastAPI replay server reading parquet sources and streaming frames.
+- RoCoF-Reply/
+  - Browser replay dashboard loading replay JSON and rendering charts/cards.
+- RoCoFAndroid/
+  - Jetpack Compose Android dashboard for replay JSON.
+- RoCoF-App-2/
+  - Placeholder/experimental area.
+
+### DataSources/
+
+Data lake by provider and dataset. Includes raw files, Processors/, and Parquet outputs where available.
+
+Key provider trees:
+- DataSources/NESO/
+- DataSources/NationalGrid/
+- DataSources/GridWatch/
+- DataSources/Weather/
+- DataSources/UkPowerNetworks/
+
+### MachineLearning/
+
+- ml_pipeline.py: reusable loaders, merge helpers, datetime features, frequency event labels.
+- Patternator/: exploratory pattern surfacing against frequency-centered windows.
+- Experts/: training scripts for dataset experts and fusion models.
+
+### Scripts/
+
+Workspace orchestration and hygiene:
+- run_parquet_conversions.py
+- validate_data_schema.py
+- validate_parquet_vs_csv.py
+- verify_setup.py
+- dedupe.py
+- split_csv.py
+- csv_totals.py
+- normalize_data_schema.py
+- check_parquet.py
+- Installer.ps1
+- Installer.py
+
+### Random/
+
+Focused analysis tools:
+- DeriveRoCoF.py
+- CalculateInertia.py
+- find_lfdd_events.py
+- scan_statutory_frequency_breaches.py
+- solar/wind analysis scripts
+
+## Data Sources and Datasets
+
+Reference files:
+- DATASOURCES.md: human summary.
+- DataSchema.json: machine-readable source/schema/storage contract.
+
+DataSchema.json includes:
+- provider source metadata and URLs,
+- local roots and dataset IDs,
+- expected raw/parquet columns,
+- partitioning conventions.
+
+Core declared dataset IDs include:
+- BalancingServices
+- BSAD_AggregatedData
+- BSAD_DissAggregatedData
+- BSAD_ForwardContracts
+- CarbonIntensityOfBalancingActions
+- DemandData
+- EACEnduringAuctionCapability
+- EC-BR_AuctionResults
+- Frequency
+- HistoricalGenerationData
+- Inertia
+- InertiaCosts
+- NonBM_AncillaryServiceDispatchPlatformInstructions
+- NonBM_AncillaryServiceDispatchPlatformWindowPrices
+- OBP_NonBMPhysicalNotifications
+- OBP_ReserveAvailability
+- ORPS_ReactivePowerService
+- TransmissionLosses
+- NationalGrid_LivePrimary_All
+- NationalGrid_LiveGSP_All
+- NationalGrid_BSP_All
+- GridwatchData
+- Weather
+
+## Parquet Conversion Coverage
+
+Discovered conversion scripts include:
+- DataSources/GridWatch/Processors/parquet_data_conversion.py
+- DataSources/NationalGrid/Processors/parquet_data_conversion.py
+- DataSources/NESO/*/Processors/parquet_data_conversion.py for major NESO families
+- DataSources/UkPowerNetworks/Processors/parquet_data_conversion.py
+- DataSources/Weather/parquet_data_conversion.py
+- DataSources/Weather/Processors/parquet_data_conversion.py
+
+Use the orchestration script to discover and run conversion scripts rather than invoking each manually.
+
+## Environment Setup
+
+You can run this project in multiple ways depending on platform and GPU requirements.
+
+### Option A: Minimal Python setup (recommended for most users)
+
+From repository root:
 
 ```bash
-python Scripts/validate_data_schema.py
+python -m venv .venv
+# Windows PowerShell
+.\.venv\Scripts\Activate.ps1
+# Linux/macOS
+# source .venv/bin/activate
+
+python -m pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-This tool detects:
+### Option B: Ubuntu + conda + RAPIDS path
 
-* missing columns
-* schema drift
-* incorrect dataset structure
-
----
-
-# Data Processing Utilities
-
-The repository includes several scripts that help manage data pipelines.
-
-## Parquet Conversion
-
-To convert raw datasets into Parquet format:
+Use setup.sh for broader environment provisioning, optional GPU stack, and helper activation script:
 
 ```bash
-python Scripts/run_parquet_conversions.py . --run
-```
-
-This script automatically discovers all conversion scripts and runs them in batch.
-
----
-
-## Schema Validation
-
-```bash
-python Scripts/validate_data_schema.py
-```
-
-Ensures datasets match expected schema definitions.
-
----
-
-## Environment Verification
-
-```bash
+bash setup.sh
+source activate_env.sh
 python Scripts/verify_setup.py
 ```
 
-Checks:
+Notes:
+- setup.sh attempts RAPIDS install first and falls back to CPU-only conda env when needed.
+- setup.sh also installs optional notebook and ML tooling.
 
-* Python dependencies
-* optional GPU support
-* required packages
+### Option C: Installer-driven pipeline execution
 
----
+- Windows PowerShell flow: Scripts/Installer.ps1
+- Python equivalent flow: Scripts/Installer.py
 
-## Dataset Management Tools
+These automate dependency checks and conversion stages with resume/validate modes.
 
-Additional utilities include:
+## Quick Start Workflow
 
-* CSV splitting for large files
-* Parquet dataset checks
-* deduplication tools
-* CSV vs Parquet validation checks
+From repository root:
 
-These scripts help maintain dataset consistency across the workspace.
-
----
-
-# Machine Learning Architecture
-
-The machine learning system is located in:
-
-```
-MachineLearning/
-```
-
-It consists of three major components.
-
----
-
-## ML Pipeline
-
-`ml_pipeline.py` handles:
-
-* loading multiple datasets
-* aligning timestamps
-* building feature sets
-* preparing data for model training
-
----
-
-## Pattern Discovery
-
-The `Patternator/` module explores datasets to surface potential:
-
-* instability signals
-* emergent patterns
-* unusual behaviour
-
-This stage is primarily exploratory and used to generate hypotheses.
-
----
-
-## Expert Models
-
-The `Experts/` directory contains **domain-specific trainers**.
-
-Examples include:
-
-* frequency behaviour models
-* inertia behaviour models
-* demand pattern models
-* balancing activity models
-* generation mix models
-* weather interaction models
-
-There are also **fusion experts** that combine signals across domains.
-
-The most comprehensive trainer is the **system state fusion model**, which attempts to integrate multiple experts into a unified representation.
-
-Pre-trained models are stored in:
-
-```
-MachineLearning/Experts/pre-trained-experts/
-```
-
----
-
-# Replay System
-
-One of the most powerful parts of this repository is the **grid replay system**.
-
-Replay allows historical grid behaviour to be reconstructed as **frame-based timelines**.
-
-Each frame represents a snapshot of:
-
-* frequency
-* generation
-* demand
-* weather
-* inertia
-* balancing activity
-
-These frames can then be streamed and visualized in multiple applications.
-
----
-
-# Web Replay Server
-
-Location:
-
-```
-Applications/RoCoF-App/
-```
-
-This component runs a **FastAPI + WebSocket server**.
-
-It:
-
-* merges multiple datasets
-* builds runtime grid snapshots
-* streams frames at **1 second resolution**
-
-This allows high-fidelity playback of historical events.
-
----
-
-# Web Replay Dashboard
-
-Location:
-
-```
-Applications/RoCoF-Reply/
-```
-
-A browser-based dashboard that:
-
-* loads replay JSON payloads
-* renders timeline views
-* displays charts and system-state cards
-
----
-
-# Android Replay App
-
-Location:
-
-```
-Applications/RoCoFAndroid/
-```
-
-A native Android dashboard built using **Jetpack Compose**.
-
-The app can:
-
-* load replay JSON files
-* display system metrics
-* provide portable field analysis tools
-
----
-
-# Replay Frame Generation
-
-Replay payloads are created using:
-
-```
-Random/DeriveRoCoF.py
-```
-
-This script:
-
-* calculates **Rate of Change of Frequency**
-* aligns generation and demand context
-* produces replay frames used by visualization tools
-
----
-
-# Quick Start
-
-## 1. Install Dependencies
-
-Create a Python environment and install dependencies:
-
+1. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
----
+2. Verify environment
+```bash
+python Scripts/verify_setup.py
+```
 
-## 2. Convert Raw Data
-
-Run all dataset conversion scripts:
-
+3. Run parquet conversions
 ```bash
 python Scripts/run_parquet_conversions.py . --run
 ```
 
----
-
-## 3. Validate Dataset Schema
-
+4. Validate schema contract
 ```bash
 python Scripts/validate_data_schema.py
 ```
 
----
-
-## 4. Start Machine Learning Analysis
-
-Open the analysis notebook:
-
-```
-MachineLearning/ml_analysis.ipynb
+5. Validate parquet freshness/completeness
+```bash
+python Scripts/validate_parquet_vs_csv.py --root . --report parquet_validation.txt
 ```
 
-Or run expert trainers directly.
+6. Start ML analysis or expert training
+```bash
+python MachineLearning/Experts/train_frequency_expert.py --device auto
+```
 
----
+7. Start replay server (if parquet data is available)
+```bash
+python Applications/RoCoF-App/server.py
+```
 
-## 5. Generate Replay Data
+Open:
+- http://127.0.0.1:8765/
+- ws://127.0.0.1:8765/ws/replay
+
+## Scripts Directory Deep Reference
+
+### run_parquet_conversions.py
+
+Purpose:
+- Recursively discover parquet_data_conversion.py scripts and run them with selected Python interpreter.
+
+Useful flags:
+- --run: execute discovered scripts
+- --raw: raw output mode
+- --all: include scripts outside Processors folders
+- --python: explicit Python executable
+- --allow-missing-backend: skip run if parquet backend unavailable
+
+Examples:
+```bash
+python Scripts/run_parquet_conversions.py
+python Scripts/run_parquet_conversions.py . --run
+python Scripts/run_parquet_conversions.py . --run --raw
+python Scripts/run_parquet_conversions.py . --run --report parq_run.txt
+```
+
+### validate_data_schema.py
+
+Purpose:
+- Compare real dataset headers/columns with DataSchema.json declarations.
+
+Examples:
+```bash
+python Scripts/validate_data_schema.py
+python Scripts/validate_data_schema.py --require-parquet
+```
+
+### validate_parquet_vs_csv.py
+
+Purpose:
+- Ensure each CSV has corresponding parquet output and parquet is not older than CSV.
+
+Examples:
+```bash
+python Scripts/validate_parquet_vs_csv.py --root .
+python Scripts/validate_parquet_vs_csv.py --root . --report parquet_validation.txt
+```
+
+### verify_setup.py
+
+Purpose:
+- Check core packages, optional packages, GPU/CUDA visibility, and run a basic functionality probe.
+
+Example:
+```bash
+python Scripts/verify_setup.py
+```
+
+### Other utility scripts
+
+- check_parquet.py: locate and optionally clean Parquet directories.
+- csv_totals.py: recursively count rows/datapoints and write JSON summary.
+- dedupe.py: data deduplication utility.
+- split_csv.py: split large CSV files into chunks.
+- normalize_data_schema.py: normalize DataSchema.json structure from discovered headers.
+
+## Machine Learning Pipeline
+
+### ml_pipeline.py
+
+Provides:
+- load_generation
+- load_weather
+- load_frequency
+- load_inertia
+- load_demand
+- load_balancing
+- load_gridwatch
+- merge_all
+- add_datetime_features
+- label_frequency_events
+
+Environment override:
+- Set TSGB_DATA_PATH to override base root used by loaders.
+
+### Patternator
+
+- MachineLearning/Patternator/patternator.py runs frequency-centered pattern surfacing and feature/correlation outputs.
+
+Example:
+```bash
+python MachineLearning/Patternator/patternator.py --max-frequency-files 12 --row-stride 5 --resample 1H
+```
+
+## Expert Trainers
+
+All trainer scripts are in MachineLearning/Experts/.
+Most output model + metrics files under MachineLearning/Experts/pre-trained-experts/.
+
+Common trainer options (varies by script):
+- --device {auto,cpu,cuda}
+- --n-estimators
+- --train-fraction
+- dataset-specific path overrides
+
+Primary trainers:
+- train_frequency_expert.py
+- train_inertia_expert.py
+- train_demand_expert.py
+- train_balancing_expert.py
+- train_generation_expert.py
+- train_gridwatch_expert.py
+- train_weather_expert.py
+- train_weather_generation_expert.py
+- train_weather_inertia_expert.py
+
+System fusion trainer:
+- train_system_state_monster.py
+
+Ensemble inference:
+- run_monster_inference.py
+
+Batch orchestrator:
+- run_all_experts.sh (Linux/conda oriented)
+
+Example commands:
+```bash
+python MachineLearning/Experts/train_weather_expert.py --device auto
+python MachineLearning/Experts/train_generation_expert.py --device auto
+python MachineLearning/Experts/train_system_state_monster.py --rounds 20 --base-estimators 500 --resolution 1S --join-tolerance 35m
+python MachineLearning/Experts/run_monster_inference.py
+```
+
+## Replay and Visualization
+
+### WebSocket replay server: Applications/RoCoF-App/server.py
+
+- Uses FastAPI.
+- Loads parquet tables for multiple data families.
+- Streams synchronized replay snapshots.
+- Serves static app assets and supports WebSocket replay endpoint.
 
 Run:
-
+```bash
+python Applications/RoCoF-App/server.py
 ```
-Random/DeriveRoCoF.py
+
+### Browser replay dashboard: Applications/RoCoF-Reply/
+
+- Loads replay JSON (default: derived_rocof_replay.json).
+- Renders cards, gauges, and timeline charts for RoCoF/frequency/flow/inertia context.
+
+Typical flow:
+1. Generate replay JSON using Random/DeriveRoCoF.py.
+2. Open Applications/RoCoF-Reply/index.html in browser.
+3. Load generated JSON if not auto-loaded.
+
+### Android replay app: Applications/RoCoFAndroid/
+
+- Native Jetpack Compose dashboard.
+- Reads replay JSON from storage picker or assets.
+
+Run in Android Studio:
+1. Open Applications/RoCoFAndroid.
+2. Allow Gradle sync.
+3. Run on emulator or device.
+
+## Random Analysis Scripts
+
+### DeriveRoCoF.py
+
+Purpose:
+- Compute sample-to-sample RoCoF from frequency CSVs.
+- Align to nearest generation and demand context.
+- Export CSV and optional replay JSON payload.
+
+Example:
+```bash
+python Random/DeriveRoCoF.py --max-files 6 --row-stride 4 --timestamp-mode midpoint --output-csv Random/derived_rocof_sample.csv --output-replay-json Applications/RoCoF-Reply/derived_rocof_replay.json
 ```
 
-Then start the replay server or dashboards.
+### CalculateInertia.py
 
----
+Purpose:
+- Estimate inertia at timestamp using fuel mix and configurable H constants.
+- Optional calibration against reported inertia data.
 
-# Current State of the Repository
+### scan_statutory_frequency_breaches.py
 
-The repository is currently undergoing structural improvements.
+Purpose:
+- Find contiguous frequency windows outside statutory limits.
 
-Recent changes include:
+### find_lfdd_events.py
 
-* refactoring data paths
-* centralizing schema definitions
-* improving dataset normalization
+Purpose:
+- Identify contiguous frequency windows below LFDD threshold.
 
-Some scripts may still reference older directory structures.
-The authoritative definitions remain:
+### solar and wind scripts
 
-* `DataSchema.json`
-* the directory layout described in this README.
+- solar_analysis_simple.py
+- solar_generation_analysis.py
+- wind_analysis_simple.py
+- wind_speed_generation_analysis.py
 
----
+These scripts quantify weather-to-generation relationships with console stats and optional interactive charts.
 
-# Why This Project Exists
+## Windows-Specific Notes
 
-This repository exists to transform public grid data into something much more useful:
+- PowerShell terminal is supported for pipeline operations.
+- If script execution is blocked, set policy for current user/session as needed.
+- Installer.ps1 includes help, validate-only mode, cleanup mode, and resume checkpoint support.
 
-* structured time-series datasets
-* system-state reconstruction tools
-* visual replay environments
-* machine learning models capable of identifying emerging grid behaviour
+Example:
+```powershell
+cd Scripts
+.\Installer.ps1 -Help
+.\Installer.ps1 -Validate
+.\Installer.ps1 -Resume
+```
 
-For researchers, engineers, or analysts interested in **grid stability, operational dynamics, or energy system behaviour**, this workspace provides the tooling needed to explore those questions in depth.
+## Known Caveats
 
----
+- Some legacy docs reference pre-refactor paths. Prefer DataSources/, Applications/, and MachineLearning/.
+- Random/DeriveRoCoF.py currently searches parents for folder name GDA exactly. If your root folder name differs by case (for example gda), run from expected path naming or patch that function for case-insensitive root detection.
+- Large conversion and training runs can take substantial time and disk IO.
+- GPU acceleration requires matching CUDA, drivers, and RAPIDS package compatibility.
+
+## Suggested End-to-End Development Flow
+
+1. Install environment and dependencies.
+2. Verify setup with Scripts/verify_setup.py.
+3. Convert datasets to parquet via Scripts/run_parquet_conversions.py.
+4. Run schema and freshness checks.
+5. Explore data in MachineLearning/ml_analysis.ipynb or scripts.
+6. Train experts in MachineLearning/Experts/.
+7. Generate replay payloads from Random/DeriveRoCoF.py.
+8. Inspect in web or Android replay app.
+
+## Related Files
+
+- README.md.old: previous root README version.
+- DATASOURCES.md: quick source list.
+- DataSchema.json: schema contract.
+- Scripts/INSTALLER_README.md: Installer.ps1 usage and warnings.
+- requirements.txt: Python dependencies.
+- setup.sh: Ubuntu/conda/RAPIDS bootstrap.
+- setup.py: Python package metadata and entrypoints.
+
+## License
+
+MIT (see package metadata). If introducing external datasets, comply with upstream source terms and acceptable usage.
