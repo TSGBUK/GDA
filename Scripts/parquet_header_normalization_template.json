@@ -1,0 +1,3138 @@
+{
+  "generated_on": "2026-03-10T17:38:31.798886+00:00",
+  "project_root": "gda",
+  "scan_root": ".",
+  "dataset_count": 21,
+  "parquet_files_scanned": 8653,
+  "template_version": "1.0.0",
+  "datasets": [
+    {
+      "dataset_path": "DataSources/GridWatch",
+      "parquet_root": "DataSources/GridWatch/Parquet",
+      "files_considered": 1001,
+      "headers_discovered": 27,
+      "headers": [
+        {
+          "source_header": "biomass",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ccgt",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "coal",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "demand",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "dutch_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ew_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "french_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "frequency",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "hydro",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "id",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ifa2",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "intelec_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "irish_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "nemo",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "north_south",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "nsl",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "nuclear",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ocgt",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "oil",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "other",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "pumped",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "scotland_england",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "solar",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "timestamp",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "vkl_ict",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "wind",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/BSAD_AggregatedData",
+      "parquet_root": "DataSources/NESO/BSAD_AggregatedData/Parquet",
+      "files_considered": 598,
+      "headers_discovered": 20,
+      "headers": [
+        {
+          "source_header": "BPA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BPA (\u00a3/MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EBCA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EBCA (\u00a3)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EBVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EBVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ESCA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ESCA (\u00a3)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ESVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ESVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SBVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SBVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SPA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SPA (\u00a3/MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SSVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SSVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Settlement Period",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SettlementPeriod",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/BSAD_ForwardContracts",
+      "parquet_root": "DataSources/NESO/BSAD_ForwardContracts/Parquet",
+      "files_considered": 534,
+      "headers_discovered": 16,
+      "headers": [
+        {
+          "source_header": "BCA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BCA (\u00a3)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BSA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BSA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SCA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SCA (\u00a3)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SSA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SSA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SVA (MWh)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Settlement Period",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SettlementPeriod",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/BalancingServices",
+      "parquet_root": "DataSources/NESO/BalancingServices/Parquet",
+      "files_considered": 477,
+      "headers_discovered": 10,
+      "headers": [
+        {
+          "source_header": "Constraints",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DatetimeUTC",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Energy Imbalance",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Frequency Control",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Negative Reserve",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Other",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Positive Reserve",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SETT_DATE",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SETT_PERIOD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/CarbonIntensityOfBalancingActions",
+      "parquet_root": "DataSources/NESO/CarbonIntensityOfBalancingActions/Parquet",
+      "files_considered": 258,
+      "headers_discovered": 5,
+      "headers": [
+        {
+          "source_header": "BOA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DATETIME",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Difference",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "FPN",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/DemandData",
+      "parquet_root": "DataSources/NESO/DemandData/Parquet",
+      "files_considered": 1256,
+      "headers_discovered": 24,
+      "headers": [
+        {
+          "source_header": "BRITNED_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DatetimeUTC",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EAST_WEST_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ELECLINK_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EMBEDDED_SOLAR_CAPACITY",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EMBEDDED_SOLAR_GENERATION",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EMBEDDED_WIND_CAPACITY",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EMBEDDED_WIND_GENERATION",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ENGLAND_WALES_DEMAND",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GREENLINK_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "IFA2_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "IFA_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MOYLE_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ND",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NEMO_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NON_BM_STOR",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NSL_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "PUMP_STORAGE_PUMPING",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SCOTTISH_TRANSFER",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SETTLEMENT_DATE",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SETTLEMENT_PERIOD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "TSD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "VIKING_FLOW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/EACEnduringAuctionCapability",
+      "parquet_root": "DataSources/NESO/EACEnduringAuctionCapability/Parquet",
+      "files_considered": 362,
+      "headers_discovered": 33,
+      "headers": [
+        {
+          "source_header": "acceptanceRatio",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionProduct",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionUnit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "basketID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "clearedVolume",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "clearingPrice",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "deliveryEnd",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "deliveryStart",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "executedQuantity",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "flexibleGroupID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "joinedFamily",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "linkedServiceWindowID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "loopedBasketID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "minimumConsecutiveWindows",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderEntryTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "paradoxicallyAcceptanceAllowed",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "postCode",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "price",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "priceLimit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "productID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "quantity",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "reasonRejected",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "registeredAuctionParticipant",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "serviceType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "source_file",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "status",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "substitutabilityFamily",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "technologyType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "unitResultID",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/EC-BR_AuctionResults",
+      "parquet_root": "DataSources/NESO/EC-BR_AuctionResults/Parquet",
+      "files_considered": 206,
+      "headers_discovered": 29,
+      "headers": [
+        {
+          "source_header": "acceptanceRatio",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionProduct",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "auctionUnit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "basketID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "clearedVolume",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "clearingPrice",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "deliveryEnd",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "deliveryStart",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "executedQuantity",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "joinedFamily",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "loopedBasketID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderEntryTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "orderType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "paradoxicallyAcceptanceAllowed",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "postCode",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "price",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "priceLimit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "productID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "quantity",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "reasonRejected",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "registeredAuctionParticipant",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "serviceType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "status",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "substitutabilityFamily",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "technologyType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "unitResultID",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/Frequency",
+      "parquet_root": "DataSources/NESO/Frequency/Parquet",
+      "files_considered": 755,
+      "headers_discovered": 3,
+      "headers": [
+        {
+          "source_header": "Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Value",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/HistoricalGenerationData",
+      "parquet_root": "DataSources/NESO/HistoricalGenerationData/Parquet",
+      "files_considered": 890,
+      "headers_discovered": 35,
+      "headers": [
+        {
+          "source_header": "BIOMASS",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "BIOMASS_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "CARBON_INTENSITY",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "COAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "COAL_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DATETIME",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "FOSSIL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "FOSSIL_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GAS",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GAS_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GENERATION",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GENERATION_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "HYDRO",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "HYDRO_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "IMPORTS",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "IMPORTS_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "LOW_CARBON",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "LOW_CARBON_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NUCLEAR",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NUCLEAR_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "OTHER",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "OTHER_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "RENEWABLE",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "RENEWABLE_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SOLAR",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SOLAR_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "STORAGE",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "STORAGE_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "WIND",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "WIND_EMB",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "WIND_EMB_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "WIND_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ZERO_CARBON",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ZERO_CARBON_perc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/Inertia",
+      "parquet_root": "DataSources/NESO/Inertia/Parquet",
+      "files_considered": 508,
+      "headers_discovered": 6,
+      "headers": [
+        {
+          "source_header": "DatetimeUTC",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Market Provided Inertia",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Outturn Inertia",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Settlement Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Settlement Period",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/InertiaCosts",
+      "parquet_root": "DataSources/NESO/InertiaCosts/Parquet",
+      "files_considered": 476,
+      "headers_discovered": 4,
+      "headers": [
+        {
+          "source_header": "Cost_per_GVAs",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DatetimeUTC",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Settlement Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformInstructions",
+      "parquet_root": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformInstructions/Parquet",
+      "files_considered": 366,
+      "headers_discovered": 12,
+      "headers": [
+        {
+          "source_header": "AssetID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "CeaseDateTimeStamp",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "DispatchDateTimeStamp",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EntryID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "IndicativePrice",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "InstructionCeaseDateTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "InstructionStartDateTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "PartyID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ServiceType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Tendered",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformWindowPrices",
+      "parquet_root": "DataSources/NESO/NonBM_AncillaryServiceDispatchPlatformWindowPrices/Parquet",
+      "files_considered": 59,
+      "headers_discovered": 9,
+      "headers": [
+        {
+          "source_header": "AssetID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "CreatedTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "EntryID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "PartyID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SPEndDateTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SPStartDateTime",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ServiceType",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "WindowPrice",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/OBP_NonBMPhysicalNotifications",
+      "parquet_root": "DataSources/NESO/OBP_NonBMPhysicalNotifications/Parquet",
+      "files_considered": 23,
+      "headers_discovered": 7,
+      "headers": [
+        {
+          "source_header": "Data",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Level From",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Level To",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Time From",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Time To",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Unit ID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/OBP_ReserveAvailability",
+      "parquet_root": "DataSources/NESO/OBP_ReserveAvailability/Parquet",
+      "files_considered": 23,
+      "headers_discovered": 9,
+      "headers": [
+        {
+          "source_header": "Availability Power",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Data",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Pair ID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Service ID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Time From",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Time To",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Unit ID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Utilisation Price",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/ORPS_ReactivePowerService",
+      "parquet_root": "DataSources/NESO/ORPS_ReactivePowerService/Parquet",
+      "files_considered": 4,
+      "headers_discovered": 424,
+      "headers": [
+        {
+          "source_header": "  Apr 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "  Oct 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 15- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 15- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 16  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 16- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 17  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Apr 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Aug 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 14- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 15- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 16  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 17  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": " Oct 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 14   - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 14  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Apr 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 14  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 14 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 15  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 16- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 18 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Aug 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Company",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 13 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 13 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 13 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 14  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 14  -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 15  -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 16 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 17  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 17  -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 18  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 18 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 19 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 19 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 19 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 21 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 21 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Dec 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Default/Market",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "FRPIm",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 14 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 14- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 15  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 15 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 16- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 18 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 19 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Feb 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "HPIm",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Im",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 14 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 14 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 15  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 15 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 16   - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 16  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 19  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 19 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jan 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 14  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 14  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 15  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 16 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 17- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jul 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "July 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 14 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 14 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 15  -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 16 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 16- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 17  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 17  -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 18  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 18 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Jun 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "June 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Location",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 14  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 14 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 15  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 15- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 15- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 16  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 17  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 17- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 19  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 19 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Mar 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 14 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 14 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 15- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 15- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 16 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 18 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "May 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Month",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Month-Year",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov  21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov  21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov -19 TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 13 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 13 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 13 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 14 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 14- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 14- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 15 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 15- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 15- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 16 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 16 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 17 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 17 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 18 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 19 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 19 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Nov 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct -19 TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 13  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 13  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 13 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 14   - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 14- LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 15  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 15- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 19 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 19 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Oct 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "PAPIm",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "PPIm",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 14  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 14- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 14- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 15 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 15- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 15- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 16  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 16  - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 16 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 17  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 17 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 17- LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 18  - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 18 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 18 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 19 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 19 -LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 19- TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 20 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 20 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 20 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 21 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 21 - TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 21 -LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 22 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 22 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 22 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 23 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 23 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 23 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 24 - LAG",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 24 - LEAD",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sep 24 - Total",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "TOTAL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Unit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "X = 0.2",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "X = 1",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Year",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "id",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/TransmissionEntryCpacity_TECRegister",
+      "parquet_root": "DataSources/NESO/TransmissionEntryCpacity_TECRegister/Parquet",
+      "files_considered": 1,
+      "headers_discovered": 16,
+      "headers": [
+        {
+          "source_header": "Agreement Type",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Connection Site",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Cumulative Total Capacity (MW)",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Customer Name",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Gate",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "HOST TO",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW Connected",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW Effective From",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW Increase / Decrease",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Plant Type",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Project ID",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Project Name",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Project Number",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Project Status",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Stage",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NESO/TransmissionLosses",
+      "parquet_root": "DataSources/NESO/TransmissionLosses/Parquet",
+      "files_considered": 2,
+      "headers_discovered": 11,
+      "headers": [
+        {
+          "source_header": "Financial Year",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "GB totals",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Month",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "NGET",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SHETL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "SPT",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sum of GB totals",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sum of NGET",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sum of SHETL",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Sum of SPT",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/NationalGrid",
+      "parquet_root": "DataSources/NationalGrid/Parquet",
+      "files_considered": 17,
+      "headers_discovered": 35,
+      "headers": [
+        {
+          "source_header": "5 Min Ave",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Amps",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Current Inst",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Derived MVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Generation",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "HH Val",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Import",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MVA",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MVA Inst",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MVAr",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MVAr Inst",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "MW Inst",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Net Demand",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Other",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Pseudo Value",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "STOR",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Solar",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "State TSDS",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Timestamp",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "ValueDate",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Volts",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Volts Inst",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Wind",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "location_hint",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "site",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "source_file",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "source_section",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "source_timestamp_col",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "source_year_hint",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "time",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "timestamp_utc",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "unit",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "value",
+          "internal_normalization": ""
+        }
+      ]
+    },
+    {
+      "dataset_path": "DataSources/Weather",
+      "parquet_root": "DataSources/Weather/Parquet",
+      "files_considered": 837,
+      "headers_discovered": 5,
+      "headers": [
+        {
+          "source_header": "Date",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Solar_Radiation_W_m2",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Temperature_C",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "Wind_Speed_100m_kph",
+          "internal_normalization": ""
+        },
+        {
+          "source_header": "database",
+          "internal_normalization": ""
+        }
+      ]
+    }
+  ]
+}
