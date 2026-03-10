@@ -1,6 +1,6 @@
 # BEGIN GDA EXCLUDES
 # TEMP
-DownloadResults.json
+*./DownloadResults.json
 
 
 # CSV Export Restrictions
