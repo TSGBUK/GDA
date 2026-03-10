@@ -1,4 +1,7 @@
 # BEGIN GDA EXCLUDES
+# TEMP
+DownloadResults.json
+
 
 # CSV Export Restrictions
 # I was late reading TOS seems i cant share the CSV files, or i can but i cant
