@@ -1,0 +1,141 @@
+{
+  "generated_at": "2026-03-10T20:50:56.458965Z",
+  "sources_file": "C:\\Users\\error\\Documents\\Git\\gda\\DataSources\\NationalGrid\\datasources.json",
+  "output_dir": "D:\\Data\\NGRAWData",
+  "results_file": "C:\\Users\\error\\Documents\\Git\\gda\\DataSources\\NationalGrid\\Processors\\DownloadResults.json",
+  "cookies_loaded": 3,
+  "total_links": 1599,
+  "downloaded": 16,
+  "already_downloaded": 0,
+  "failed": 0,
+  "files": [
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/a0440cac-0497-4124-8fad-564ed090dd80/download/511285.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\511285.csv",
+      "size_bytes": 13377430,
+      "last_downloaded": "2026-03-10T20:49:49.422100Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/f8e2c18d-3b91-4154-ab0b-265cbb81ce53/download/511320.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\511320.csv",
+      "size_bytes": 13507374,
+      "last_downloaded": "2026-03-10T20:50:02.010840Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/538eb87c-17b2-4abc-b1cf-ac27d2c0baa9/download/511469.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\511469.csv",
+      "size_bytes": 14382708,
+      "last_downloaded": "2026-03-10T20:50:11.914279Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/e6138ce1-0d6e-4681-8173-dd66c812adbe/download/511558.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\511558.csv",
+      "size_bytes": 12373261,
+      "last_downloaded": "2026-03-10T20:50:21.062568Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/945d480f-445e-4205-9cb8-146ac565e5b5/download/511654.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\511654.csv",
+      "size_bytes": 7546472,
+      "last_downloaded": "2026-03-10T20:50:27.255406Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/0d8999b2-b4e9-4096-9f06-4b5824371f2b/download/512129.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512129.csv",
+      "size_bytes": 11391096,
+      "last_downloaded": "2026-03-10T20:50:27.480341Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/a9179d56-3912-4c96-8cbf-fd67d789bd52/download/512238.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512238.csv",
+      "size_bytes": 15898457,
+      "last_downloaded": "2026-03-10T20:50:32.258482Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/166cc9a1-48ba-44f6-898f-0eaa473e61e0/download/512247.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512247.csv",
+      "size_bytes": 10621925,
+      "last_downloaded": "2026-03-10T20:50:33.906508Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/a1088549-08fc-4e08-90d9-a211e1989ff5/download/512442.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512442.csv",
+      "size_bytes": 12553655,
+      "last_downloaded": "2026-03-10T20:50:39.759179Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/4c20c614-10e1-4ed7-828d-fc59a347f23a/download/512462.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512462.csv",
+      "size_bytes": 9686512,
+      "last_downloaded": "2026-03-10T20:50:39.802022Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/3501d480-d476-491f-b2e9-c4ece837020f/download/512619.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512619.csv",
+      "size_bytes": 10667736,
+      "last_downloaded": "2026-03-10T20:50:44.138237Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/dfb72704-4482-40d5-9a62-4f754caf1c4d/download/512768.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512768.csv",
+      "size_bytes": 11848864,
+      "last_downloaded": "2026-03-10T20:50:47.217180Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/1f205b64-3c21-43b9-b49c-deee6608b276/download/512794.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\512794.csv",
+      "size_bytes": 15110922,
+      "last_downloaded": "2026-03-10T20:50:48.958344Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "LV Load Monitor Data",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/2afd855c-533a-45fa-82b6-05cf02579fd2/resource/0298b592-8c85-4022-93f0-d56ff2c2fcd8/download/720512.csv",
+      "file": "D:\\Data\\NGRAWData\\LV Load Monitor Data\\720512.csv",
+      "size_bytes": 50308296,
+      "last_downloaded": "2026-03-10T20:49:49.345167Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "Outage and Power Cut Dataset",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/d6672e1e-c684-4cea-bb78-c7e5248b62a2/resource/a1365982-4e05-463c-8304-8323a2ba0ccd/download/live_detailed_power_cuts.csv",
+      "file": "D:\\Data\\NGRAWData\\Outage and Power Cut Dataset\\live_detailed_power_cuts.csv",
+      "size_bytes": 4313,
+      "last_downloaded": "2026-03-10T20:49:45.362968Z",
+      "status": "downloaded"
+    },
+    {
+      "dataset": "Outage and Power Cut Dataset",
+      "url": "https://connecteddata.nationalgrid.co.uk/dataset/d6672e1e-c684-4cea-bb78-c7e5248b62a2/resource/292f788f-4339-455b-8cc0-153e14509d4d/download/power_outage_ext.csv",
+      "file": "D:\\Data\\NGRAWData\\Outage and Power Cut Dataset\\power_outage_ext.csv",
+      "size_bytes": 4576,
+      "last_downloaded": "2026-03-10T20:49:49.078716Z",
+      "status": "downloaded"
+    }
+  ]
+}
